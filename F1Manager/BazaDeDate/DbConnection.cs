@@ -52,13 +52,120 @@ namespace F1Manager.BazaDeDate
                     username VARCHAR(100) NOT NULL UNIQUE,
                     email VARCHAR(255) NOT NULL UNIQUE,
                     password VARCHAR(255) NOT NULL,
-                    role VARCHAR(50) NOT NULL,
+                    role VARCHAR(50) NOT NULL DEFAULT 'User',
                     DateCreate DATETIME DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ";
 
             using var cmd = new MySqlCommand(createTable, conn);
             cmd.ExecuteNonQuery();
+
+            if (ColumnExists(conn, "users", "PasswordHash"))
+            {
+                if (!ColumnExists(conn, "users", "password"))
+                {
+                    string addPasswordColumn = @"
+                        ALTER TABLE users
+                        ADD COLUMN password VARCHAR(255) NULL;
+                    ";
+
+                    using var addPasswordCmd = new MySqlCommand(addPasswordColumn, conn);
+                    addPasswordCmd.ExecuteNonQuery();
+                }
+
+                string copyOldPasswords = @"
+                    UPDATE users
+                    SET password = PasswordHash
+                    WHERE (password IS NULL OR password = '') AND PasswordHash IS NOT NULL;
+                ";
+
+                using var copyCmd = new MySqlCommand(copyOldPasswords, conn);
+                copyCmd.ExecuteNonQuery();
+
+                string alterPasswordColumn = @"
+                    ALTER TABLE users
+                    MODIFY COLUMN password VARCHAR(255) NOT NULL DEFAULT '';
+                ";
+
+                using var alterPasswordCmd = new MySqlCommand(alterPasswordColumn, conn);
+                alterPasswordCmd.ExecuteNonQuery();
+
+                string dropOldColumn = @"
+                    ALTER TABLE users
+                    DROP COLUMN PasswordHash;
+                ";
+
+                using var dropColumnCmd = new MySqlCommand(dropOldColumn, conn);
+                dropColumnCmd.ExecuteNonQuery();
+            }
+
+            if (ColumnExists(conn, "users", "Rol"))
+            {
+                if (!ColumnExists(conn, "users", "role"))
+                {
+                    string addRoleColumn = @"
+                        ALTER TABLE users
+                        ADD COLUMN role VARCHAR(50) NULL;
+                    ";
+
+                    using var addRoleCmd = new MySqlCommand(addRoleColumn, conn);
+                    addRoleCmd.ExecuteNonQuery();
+                }
+
+                string copyOldRoles = @"
+                    UPDATE users
+                    SET role = Rol
+                    WHERE (role IS NULL OR role = '') AND Rol IS NOT NULL;
+                ";
+
+                using var copyRoleCmd = new MySqlCommand(copyOldRoles, conn);
+                copyRoleCmd.ExecuteNonQuery();
+
+                string alterRoleColumn = @"
+                    ALTER TABLE users
+                    MODIFY COLUMN role VARCHAR(50) NOT NULL DEFAULT 'User';
+                ";
+
+                using var alterRoleCmd = new MySqlCommand(alterRoleColumn, conn);
+                alterRoleCmd.ExecuteNonQuery();
+
+                string dropOldRoleColumn = @"
+                    ALTER TABLE users
+                    DROP COLUMN Rol;
+                ";
+
+                using var dropRoleCmd = new MySqlCommand(dropOldRoleColumn, conn);
+                dropRoleCmd.ExecuteNonQuery();
+            }
+
+            if (!ColumnExists(conn, "users", "role"))
+            {
+                string addRoleColumn = @"
+                    ALTER TABLE users
+                    ADD COLUMN role VARCHAR(50) NOT NULL DEFAULT 'User';
+                ";
+
+                using var addRoleCmd = new MySqlCommand(addRoleColumn, conn);
+                addRoleCmd.ExecuteNonQuery();
+            }
+        }
+
+        private bool ColumnExists(MySqlConnection conn, string tableName, string columnName)
+        {
+            string query = @"
+                SELECT COUNT(*)
+                FROM information_schema.columns
+                WHERE table_schema = @db
+                  AND table_name = @table
+                  AND column_name = @column;
+            ";
+
+            using var cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@db", database);
+            cmd.Parameters.AddWithValue("@table", tableName);
+            cmd.Parameters.AddWithValue("@column", columnName);
+
+            return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
         }
 
         // ✔ Inserează admin + user automat

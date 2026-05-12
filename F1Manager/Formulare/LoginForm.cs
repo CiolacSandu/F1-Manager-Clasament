@@ -45,5 +45,11 @@ namespace F1Manager.Formulare
                 MessageBox.Show("Date greșite!");
             }
         }
+
+        private void btnRegisterLink_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.ShowDialog();
+        }
     }
 }

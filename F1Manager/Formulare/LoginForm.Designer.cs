@@ -11,6 +11,7 @@ namespace F1Manager.Formulare
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnRegisterLink;
 
         protected override void Dispose(bool disposing)
         {
@@ -31,6 +32,7 @@ namespace F1Manager.Formulare
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.btnRegisterLink = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,12 +119,27 @@ namespace F1Manager.Formulare
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // btnRegisterLink
+            // 
+            this.btnRegisterLink.FlatAppearance.BorderSize = 0;
+            this.btnRegisterLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegisterLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegisterLink.ForeColor = System.Drawing.Color.Black;
+            this.btnRegisterLink.Location = new System.Drawing.Point(100, 310);
+            this.btnRegisterLink.Name = "btnRegisterLink";
+            this.btnRegisterLink.Size = new System.Drawing.Size(180, 30);
+            this.btnRegisterLink.TabIndex = 7;
+            this.btnRegisterLink.Text = "Ai cont? Register";
+            this.btnRegisterLink.UseVisualStyleBackColor = true;
+            this.btnRegisterLink.Click += new System.EventHandler(this.btnRegisterLink_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.ClientSize = new System.Drawing.Size(380, 320);
+            this.ClientSize = new System.Drawing.Size(380, 360);
+            this.Controls.Add(this.btnRegisterLink);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);

@@ -25,7 +25,7 @@ namespace F1Manager.Servicii
                 cmd.Parameters.AddWithValue("@u", user.Username);
                 cmd.Parameters.AddWithValue("@e", user.Email);
                 cmd.Parameters.AddWithValue("@p", user.Password);
-                cmd.Parameters.AddWithValue("@r", "User"); // Default role
+                cmd.Parameters.AddWithValue("@r", "User");
 
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -36,7 +36,7 @@ namespace F1Manager.Servicii
             }
         }
 
-        // ✔ LOGIN corect (returnează Role sau null)
+        // LOGIN
         public string? Login(string username, string password)
         {
             LastError = null;
@@ -48,8 +48,8 @@ namespace F1Manager.Servicii
                     conn.Open();
 
                     string query = @"
-                        SELECT Role 
-                        FROM users 
+                        SELECT role
+                        FROM users
                         WHERE username = @u AND password = @p
                     ";
 

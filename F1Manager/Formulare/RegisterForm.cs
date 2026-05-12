@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using F1Manager.Modele;
 using F1Manager.Servicii;
@@ -12,6 +13,20 @@ namespace F1Manager.Formulare
         public RegisterForm()
         {
             InitializeComponent();
+            LoadHeaderLogo();
+        }
+
+        private void LoadHeaderLogo()
+        {
+            try
+            {
+                string logoPath = Path.Combine(Application.StartupPath, "Resources", "Imagini", "f1_logo.png");
+                if (File.Exists(logoPath))
+                {
+                    pictureBoxLogo.Image = Image.FromFile(logoPath);
+                }
+            }
+            catch { /* Ignore if logo loading fails */ }
         }
 
         private void btnRegister_Click(object sender, EventArgs e)

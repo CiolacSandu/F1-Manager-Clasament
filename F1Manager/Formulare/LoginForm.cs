@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using F1Manager.Servicii;
 
@@ -11,6 +12,20 @@ namespace F1Manager.Formulare
         public LoginForm()
         {
             InitializeComponent();
+            LoadHeaderLogo();
+        }
+
+        private void LoadHeaderLogo()
+        {
+            try
+            {
+                string logoPath = Path.Combine(Application.StartupPath, "Resources", "Imagini", "f1_logo.png");
+                if (File.Exists(logoPath))
+                {
+                    pictureBoxLogo.Image = Image.FromFile(logoPath);
+                }
+            }
+            catch { /* Ignore if logo loading fails */ }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -42,7 +57,11 @@ namespace F1Manager.Formulare
             }
             else
             {
-                MessageBox.Show("Date greșite!");
+                string message = string.IsNullOrEmpty(service.LastError)
+                    ? "Date greșite!"
+                    : service.LastError;
+
+                MessageBox.Show(message);
             }
         }
 

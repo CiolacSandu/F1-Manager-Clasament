@@ -4,6 +4,7 @@ namespace F1Manager.Formulare
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Label lblAppTitle;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblUsername;
@@ -25,6 +26,7 @@ namespace F1Manager.Formulare
         private void InitializeComponent()
         {
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.lblAppTitle = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -39,38 +41,50 @@ namespace F1Manager.Formulare
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.Black;
+            this.pnlHeader.Controls.Add(this.pictureBoxLogo);
             this.pnlHeader.Controls.Add(this.lblAppTitle);
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(382, 75);
+            this.pnlHeader.Size = new System.Drawing.Size(450, 80);
             this.pnlHeader.TabIndex = 0;
+            // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(280, 5);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(160, 70);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 1;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // lblAppTitle
             // 
             this.lblAppTitle.AutoSize = true;
-            this.lblAppTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAppTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblAppTitle.ForeColor = System.Drawing.Color.White;
-            this.lblAppTitle.Location = new System.Drawing.Point(18, 20);
+            this.lblAppTitle.Location = new System.Drawing.Point(18, 28);
             this.lblAppTitle.Name = "lblAppTitle";
-            this.lblAppTitle.Size = new System.Drawing.Size(206, 41);
+            this.lblAppTitle.Size = new System.Drawing.Size(180, 28);
             this.lblAppTitle.TabIndex = 0;
-            this.lblAppTitle.Text = "F1 Manager";
+            this.lblAppTitle.Text = "F1 Manager și Clasament";
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.AutoSize = false;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblTitle.Location = new System.Drawing.Point(20, 90);
+            this.lblTitle.Location = new System.Drawing.Point(0, 95);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(205, 28);
+            this.lblTitle.Size = new System.Drawing.Size(450, 37);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Login to F1 Manager";
+            this.lblTitle.Text = "Login";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(20, 130);
+            this.lblUsername.Location = new System.Drawing.Point(25, 140);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 17);
             this.lblUsername.TabIndex = 2;
@@ -80,15 +94,15 @@ namespace F1Manager.Formulare
             // 
             this.txtUsername.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtUsername.Location = new System.Drawing.Point(20, 152);
+            this.txtUsername.Location = new System.Drawing.Point(25, 160);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(340, 22);
+            this.txtUsername.Size = new System.Drawing.Size(400, 22);
             this.txtUsername.TabIndex = 3;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(20, 195);
+            this.lblPassword.Location = new System.Drawing.Point(25, 200);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(73, 17);
             this.lblPassword.TabIndex = 4;
@@ -98,22 +112,23 @@ namespace F1Manager.Formulare
             // 
             this.txtPassword.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPassword.Location = new System.Drawing.Point(20, 217);
+            this.txtPassword.Location = new System.Drawing.Point(25, 220);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(340, 22);
+            this.txtPassword.Size = new System.Drawing.Size(400, 22);
             this.txtPassword.TabIndex = 5;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.Black;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLogin.FlatAppearance.BorderSize = 2;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(130, 260);
+            this.btnLogin.Location = new System.Drawing.Point(150, 270);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(120, 40);
+            this.btnLogin.Size = new System.Drawing.Size(150, 45);
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -123,13 +138,14 @@ namespace F1Manager.Formulare
             // 
             this.btnRegisterLink.FlatAppearance.BorderSize = 0;
             this.btnRegisterLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegisterLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRegisterLink.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRegisterLink.ForeColor = System.Drawing.Color.Black;
-            this.btnRegisterLink.Location = new System.Drawing.Point(100, 310);
+            this.btnRegisterLink.Location = new System.Drawing.Point(25, 330);
             this.btnRegisterLink.Name = "btnRegisterLink";
-            this.btnRegisterLink.Size = new System.Drawing.Size(180, 30);
+            this.btnRegisterLink.Size = new System.Drawing.Size(400, 45);
             this.btnRegisterLink.TabIndex = 7;
-            this.btnRegisterLink.Text = "Ai cont? Register";
+            this.btnRegisterLink.Text = "Do you have an account? Register";
+            this.btnRegisterLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnRegisterLink.UseVisualStyleBackColor = true;
             this.btnRegisterLink.Click += new System.EventHandler(this.btnRegisterLink_Click);
             // 
@@ -137,15 +153,15 @@ namespace F1Manager.Formulare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.ClientSize = new System.Drawing.Size(380, 360);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.ClientSize = new System.Drawing.Size(450, 380);
             this.Controls.Add(this.btnRegisterLink);
             this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

@@ -1,5 +1,0 @@
-C:\Users\user\Desktop\F1 Manager + Clasament\obj\Debug\net8.0-windows\F1 Manager + Clasament.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\user\Desktop\F1 Manager + Clasament\obj\Debug\net8.0-windows\F1 Manager + Clasament.AssemblyInfoInputs.cache
-C:\Users\user\Desktop\F1 Manager + Clasament\obj\Debug\net8.0-windows\F1 Manager + Clasament.AssemblyInfo.cs
-C:\Users\user\Desktop\F1 Manager + Clasament\obj\Debug\net8.0-windows\F1 Manager + Clasament.csproj.CoreCompileInputs.cache
-C:\Users\user\Desktop\F1 Manager + Clasament\obj\Debug\net8.0-windows\F1 Manager + Clasament.sourcelink.json

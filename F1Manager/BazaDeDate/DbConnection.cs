@@ -51,54 +51,14 @@ namespace F1Manager.BazaDeDate
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(100) NOT NULL UNIQUE,
                     email VARCHAR(255) NOT NULL UNIQUE,
+                    password VARCHAR(255) NOT NULL,
                     role VARCHAR(50) NOT NULL,
                     DateCreate DATETIME DEFAULT CURRENT_TIMESTAMP
-                );
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ";
 
             using var cmd = new MySqlCommand(createTable, conn);
             cmd.ExecuteNonQuery();
-
-            if (!ColumnExists(conn, "users", "password"))
-            {
-                string addPasswordColumn = @"
-                    ALTER TABLE users
-                    ADD COLUMN password VARCHAR(255) NOT NULL DEFAULT '';
-                ";
-
-                using var alterCmd = new MySqlCommand(addPasswordColumn, conn);
-                alterCmd.ExecuteNonQuery();
-            }
-
-            if (ColumnExists(conn, "users", "PasswordHash"))
-            {
-                string copyOldPasswords = @"
-                    UPDATE users
-                    SET password = PasswordHash
-                    WHERE password = '' AND PasswordHash IS NOT NULL;
-                ";
-
-                using var copyCmd = new MySqlCommand(copyOldPasswords, conn);
-                copyCmd.ExecuteNonQuery();
-            }
-        }
-
-        private bool ColumnExists(MySqlConnection conn, string tableName, string columnName)
-        {
-            string query = @"
-                SELECT COUNT(*)
-                FROM information_schema.columns
-                WHERE table_schema = @db
-                  AND table_name = @table
-                  AND column_name = @column;
-            ";
-
-            using var cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@db", database);
-            cmd.Parameters.AddWithValue("@table", tableName);
-            cmd.Parameters.AddWithValue("@column", columnName);
-
-            return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
         }
 
         // ✔ Inserează admin + user automat

@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using F1Manager.Modele;
 using F1Manager.Servicii;
 
 namespace F1Manager.Formulare
@@ -16,30 +15,30 @@ namespace F1Manager.Formulare
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text != txtConfirmPassword.Text)
-            {
-                MessageBox.Show("Parolele nu coincid!");
-                return;
-            }
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
 
-            User user = new User()
-            {
-                Username = txtUsername.Text,
-                Email = txtEmail.Text,
-                Password = txtPassword.Text
-            };
+            string? role = service.Login(username, password);
 
-            if (service.Register(user))
+            if (role != null)
             {
-                MessageBox.Show("Cont creat!");
-            }
-            else if (!string.IsNullOrEmpty(service.LastError))
-            {
-                MessageBox.Show("Eroare bază de date: " + service.LastError, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Login reușit!");
+                this.Hide();
+
+                if (role == "Admin")
+                {
+                    DashboardAdminForm f = new DashboardAdminForm();
+                    f.Show();
+                }
+                else
+                {
+                    DashboardUserForm f = new DashboardUserForm();
+                    f.Show();
+                }
             }
             else
             {
-                MessageBox.Show("Eroare la crearea contului.");
+                MessageBox.Show("Date greșite!");
             }
         }
     }

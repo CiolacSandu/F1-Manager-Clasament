@@ -51,7 +51,7 @@ namespace F1Manager.Formulare
 
                 this.Hide();
 
-                // ADMIN
+                
                 if (role.ToLower() == "admin")
                 {
                     DashboardAdminForm adminForm =
@@ -60,7 +60,7 @@ namespace F1Manager.Formulare
                     adminForm.Show();
                 }
 
-                // USER
+                
                 else
                 {
                     DashboardUserForm userForm =

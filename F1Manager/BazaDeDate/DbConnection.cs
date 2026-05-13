@@ -40,13 +40,14 @@ namespace F1Manager.BazaDeDate
             cmd.ExecuteNonQuery();
         }
 
-        // ✔ Creează tabelul users
+        // ✔ Creează toate tabelele necesare
         private void EnsureTablesExist()
         {
             using var conn = new MySqlConnection(ConnectionString);
             conn.Open();
 
-            string createTable = @"
+            // Tabela users
+            string createUsers = @"
                 CREATE TABLE IF NOT EXISTS users (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(100) NOT NULL UNIQUE,
@@ -56,10 +57,66 @@ namespace F1Manager.BazaDeDate
                     DateCreate DATETIME DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
             ";
+            using (var cmd = new MySqlCommand(createUsers, conn))
+                cmd.ExecuteNonQuery();
 
-            using var cmd = new MySqlCommand(createTable, conn);
-            cmd.ExecuteNonQuery();
+            // Tabela echipe
+            string createEchipe = @"
+                CREATE TABLE IF NOT EXISTS echipe (
+                    EchipaID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nume VARCHAR(200) NOT NULL,
+                    Tara VARCHAR(100) DEFAULT NULL,
+                    DirectorEchipa VARCHAR(200) DEFAULT NULL,
+                    Buget DECIMAL(15,2) DEFAULT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ";
+            using (var cmd = new MySqlCommand(createEchipe, conn))
+                cmd.ExecuteNonQuery();
 
+            // Tabela piloti
+            string createPiloti = @"
+                CREATE TABLE IF NOT EXISTS piloti (
+                    PilotID INT AUTO_INCREMENT PRIMARY KEY,
+                    Nume VARCHAR(200) NOT NULL,
+                    Nationalitate VARCHAR(100) DEFAULT NULL,
+                    Varsta INT DEFAULT NULL,
+                    NumarMasina INT DEFAULT NULL,
+                    EchipaID INT DEFAULT NULL,
+                    FOREIGN KEY (EchipaID) REFERENCES echipe(EchipaID) ON DELETE SET NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ";
+            using (var cmd = new MySqlCommand(createPiloti, conn))
+                cmd.ExecuteNonQuery();
+
+            // Tabela curse
+            string createCurse = @"
+                CREATE TABLE IF NOT EXISTS curse (
+                    CursaID INT AUTO_INCREMENT PRIMARY KEY,
+                    NumeCursa VARCHAR(200) NOT NULL,
+                    Locatie VARCHAR(200) DEFAULT NULL,
+                    DataCursa DATE DEFAULT NULL,
+                    NumarTure INT DEFAULT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ";
+            using (var cmd = new MySqlCommand(createCurse, conn))
+                cmd.ExecuteNonQuery();
+
+            // Tabela clasament
+            string createClasament = @"
+                CREATE TABLE IF NOT EXISTS clasament (
+                    ClasamentID INT AUTO_INCREMENT PRIMARY KEY,
+                    PilotID INT NOT NULL,
+                    CursaID INT NOT NULL,
+                    PozitieFinala INT NOT NULL,
+                    Puncte INT NOT NULL DEFAULT 0,
+                    FOREIGN KEY (PilotID) REFERENCES piloti(PilotID) ON DELETE CASCADE,
+                    FOREIGN KEY (CursaID) REFERENCES curse(CursaID) ON DELETE CASCADE
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ";
+            using (var cmd = new MySqlCommand(createClasament, conn))
+                cmd.ExecuteNonQuery();
+
+            // Migrări vechi users - PasswordHash -> password
             if (ColumnExists(conn, "users", "PasswordHash"))
             {
                 if (!ColumnExists(conn, "users", "password"))

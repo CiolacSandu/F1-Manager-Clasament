@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using F1Manager.Servicii;
@@ -19,22 +20,28 @@ namespace F1Manager.Formulare
         {
             try
             {
-                string logoPath = Path.Combine(Application.StartupPath, "Resources", "Imagini", "f1_logo.png");
+                string logoPath = Path.Combine(
+                    Application.StartupPath,
+                    "Resources",
+                    "Imagini",
+                    "f1_logo.png"
+                );
+
                 if (File.Exists(logoPath))
                 {
                     pictureBoxLogo.Image = Image.FromFile(logoPath);
+                    pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
-            catch { /* Ignore if logo loading fails */ }
+            catch
+            {
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
-
-            // ✔ DEBUG (dacă vrei să vezi ce trimiți)
-            // MessageBox.Show($"U: '{username}' P: '{password}'");
 
             string? role = service.Login(username, password);
 
@@ -44,30 +51,37 @@ namespace F1Manager.Formulare
 
                 this.Hide();
 
-                if (role == "Admin")
+                // ADMIN
+                if (role.ToLower() == "admin")
                 {
-                    DashboardAdminForm f = new DashboardAdminForm();
-                    f.Show();
+                    DashboardAdminForm adminForm =
+                        new DashboardAdminForm();
+
+                    adminForm.Show();
                 }
+
+                // USER
                 else
                 {
-                    DashboardUserForm f = new DashboardUserForm();
-                    f.Show();
+                    DashboardUserForm userForm =
+                        new DashboardUserForm();
+
+                    userForm.Show();
                 }
             }
             else
             {
-                string message = string.IsNullOrEmpty(service.LastError)
-                    ? "Date greșite!"
-                    : service.LastError;
-
-                MessageBox.Show(message);
+                MessageBox.Show(
+                    service.LastError ?? "Date greșite!"
+                );
             }
         }
 
         private void btnRegisterLink_Click(object sender, EventArgs e)
         {
-            RegisterForm registerForm = new RegisterForm();
+            RegisterForm registerForm =
+                new RegisterForm();
+
             registerForm.ShowDialog();
         }
     }

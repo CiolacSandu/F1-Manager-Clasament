@@ -10,6 +10,7 @@ namespace F1Manager.Servicii
 
         DbConnection db = new DbConnection();
 
+        // REGISTER
         public bool Register(User user)
         {
             LastError = null;
@@ -17,14 +18,22 @@ namespace F1Manager.Servicii
             try
             {
                 using var conn = db.GetConnection();
+
                 conn.Open();
 
-                string query = "INSERT INTO users(username,email,password,role) VALUES(@u,@e,@p,@r)";
-                using var cmd = new MySqlCommand(query, conn);
+                string query =
+                    @"INSERT INTO users
+                    (username,email,password,role)
+                    VALUES(@u,@e,@p,@r)";
+
+                using var cmd =
+                    new MySqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@u", user.Username);
                 cmd.Parameters.AddWithValue("@e", user.Email);
                 cmd.Parameters.AddWithValue("@p", user.Password);
+
+                // implicit USER
                 cmd.Parameters.AddWithValue("@r", "User");
 
                 return cmd.ExecuteNonQuery() > 0;
@@ -43,28 +52,31 @@ namespace F1Manager.Servicii
 
             try
             {
-                using (var conn = db.GetConnection())
+                using var conn = db.GetConnection();
+
+                conn.Open();
+
+                string query =
+                    @"SELECT role
+                    FROM users
+                    WHERE username=@u
+                    AND password=@p";
+
+                using var cmd =
+                    new MySqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@u", username.Trim());
+                cmd.Parameters.AddWithValue("@p", password.Trim());
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
                 {
-                    conn.Open();
-
-                    string query = @"
-                        SELECT role
-                        FROM users
-                        WHERE username = @u AND password = @p
-                    ";
-
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                    cmd.Parameters.AddWithValue("@u", username.Trim());
-                    cmd.Parameters.AddWithValue("@p", password.Trim());
-
-                    object result = cmd.ExecuteScalar();
-
-                    if (result != null)
-                        return result.ToString();
-
-                    return null;
+                    return result.ToString();
                 }
+
+                LastError = "Username sau parola incorectă!";
+                return null;
             }
             catch (Exception ex)
             {

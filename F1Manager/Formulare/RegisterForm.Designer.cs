@@ -16,6 +16,7 @@ namespace F1Manager.Formulare
         private System.Windows.Forms.Label lblConfirmPassword;
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button btnBackToLogin;
 
         protected override void Dispose(bool disposing)
         {
@@ -41,6 +42,8 @@ namespace F1Manager.Formulare
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.btnBackToLogin = new System.Windows.Forms.Button();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeader
@@ -78,6 +81,7 @@ namespace F1Manager.Formulare
             // 
             this.lblPageTitle.AutoSize = false;
             this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPageTitle.ForeColor = System.Drawing.Color.Black;
             this.lblPageTitle.Location = new System.Drawing.Point(0, 95);
             this.lblPageTitle.Name = "lblPageTitle";
             this.lblPageTitle.Size = new System.Drawing.Size(450, 37);
@@ -96,6 +100,8 @@ namespace F1Manager.Formulare
             // 
             // txtUsername
             // 
+            this.txtUsername.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUsername.Location = new System.Drawing.Point(25, 160);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(400, 22);
@@ -104,7 +110,7 @@ namespace F1Manager.Formulare
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(25, 205);
+            this.lblEmail.Location = new System.Drawing.Point(25, 195);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(46, 17);
             this.lblEmail.TabIndex = 3;
@@ -112,7 +118,9 @@ namespace F1Manager.Formulare
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(25, 225);
+            this.txtEmail.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEmail.Location = new System.Drawing.Point(25, 215);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(400, 22);
             this.txtEmail.TabIndex = 4;
@@ -120,7 +128,7 @@ namespace F1Manager.Formulare
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(25, 270);
+            this.lblPassword.Location = new System.Drawing.Point(25, 250);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(73, 17);
             this.lblPassword.TabIndex = 5;
@@ -128,7 +136,9 @@ namespace F1Manager.Formulare
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(25, 290);
+            this.txtPassword.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Location = new System.Drawing.Point(25, 270);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(400, 22);
             this.txtPassword.TabIndex = 6;
@@ -137,7 +147,7 @@ namespace F1Manager.Formulare
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(25, 335);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(25, 305);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(132, 17);
             this.lblConfirmPassword.TabIndex = 7;
@@ -145,7 +155,9 @@ namespace F1Manager.Formulare
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(25, 355);
+            this.txtConfirmPassword.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtConfirmPassword.Location = new System.Drawing.Point(25, 325);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(400, 22);
             this.txtConfirmPassword.TabIndex = 8;
@@ -159,7 +171,7 @@ namespace F1Manager.Formulare
             this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegister.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnRegister.ForeColor = System.Drawing.Color.White;
-            this.btnRegister.Location = new System.Drawing.Point(150, 400);
+            this.btnRegister.Location = new System.Drawing.Point(150, 370);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(150, 45);
             this.btnRegister.TabIndex = 9;
@@ -167,11 +179,28 @@ namespace F1Manager.Formulare
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
+            // btnBackToLogin
+            // 
+            this.btnBackToLogin.FlatAppearance.BorderSize = 0;
+            this.btnBackToLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackToLogin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnBackToLogin.ForeColor = System.Drawing.Color.Black;
+            this.btnBackToLogin.Location = new System.Drawing.Point(25, 425);
+            this.btnBackToLogin.Name = "btnBackToLogin";
+            this.btnBackToLogin.Size = new System.Drawing.Size(400, 45);
+            this.btnBackToLogin.TabIndex = 11;
+            this.btnBackToLogin.Text = "Ai deja cont? Autentifică-te";
+            this.btnBackToLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnBackToLogin.UseVisualStyleBackColor = true;
+            this.btnBackToLogin.Click += new System.EventHandler(this.btnBackToLogin_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.ClientSize = new System.Drawing.Size(450, 480);
+            this.Controls.Add(this.btnBackToLogin);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.lblConfirmPassword);
@@ -183,12 +212,13 @@ namespace F1Manager.Formulare
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblPageTitle);
             this.Controls.Add(this.pnlHeader);
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register";
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

@@ -29,6 +29,11 @@ namespace F1Manager.Formulare
             catch { /* Ignore if logo loading fails */ }
         }
 
+        private void btnBackToLogin_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnRegister_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();

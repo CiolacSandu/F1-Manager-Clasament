@@ -1,0 +1,48 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        x:Class="F1ManagerAvalonia.Formulare.LoginWindow"
+        Title="Login - F1 Manager"
+        Width="400" Height="450"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+    <Panel Background="#1e1e2e">
+        <!-- Background -->
+        <Border Background="#1e1e2e" />
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="15" Width="300">
+            <!-- Logo -->
+            <Image Name="pictureBoxLogo" Width="200" Height="100" Stretch="Uniform" />
+
+            <!-- Title -->
+            <TextBlock Text="Autentificare" FontSize="24" FontWeight="Bold"
+                       Foreground="White" HorizontalAlignment="Center" />
+
+             <!-- Username -->
+             <TextBox Name="txtUsername" PlaceholderText="Username"
+                     Background="#2d2d44" Foreground="White" BorderBrush="#444"
+                     Height="40" FontSize="14" Padding="10,0" />
+
+             <!-- Password -->
+             <TextBox Name="txtPassword" PlaceholderText="Parolă"
+                     PasswordChar="●"
+                     Background="#2d2d44" Foreground="White" BorderBrush="#444"
+                     Height="40" FontSize="14" Padding="10,0" />
+
+            <!-- Login Button -->
+            <Button Name="btnLogin" Content="Autentificare"
+                    Background="#e10600" Foreground="White"
+                    FontSize="16" FontWeight="Bold" Height="45"
+                    BorderThickness="0"
+                    Cursor="Hand" />
+
+            <!-- Register Link -->
+            <Button Name="btnRegisterLink" Content="Nu ai cont? Înregistrează-te"
+                    Background="Transparent" Foreground="#4da6ff"
+                    FontSize="13" BorderThickness="0"
+                    Cursor="Hand" />
+        </StackPanel>
+    </Panel>
+</Window>

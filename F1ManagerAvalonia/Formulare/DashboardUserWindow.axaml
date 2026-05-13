@@ -1,0 +1,168 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="F1ManagerAvalonia.Formulare.DashboardUserWindow"
+        Title="F1 Manager - Dashboard User"
+        Width="1200" Height="800"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+    <Panel Background="#141414">
+        <DockPanel>
+            <!-- Sidebar -->
+            <Border DockPanel.Dock="Left" Width="250" Background="#121212">
+                <StackPanel>
+                    <!-- Brand -->
+                    <TextBlock Text="F1 Manager" FontSize="20" FontWeight="Bold"
+                               Foreground="#e61c2b" Margin="24,24,0,20" />
+
+                    <!-- Nav buttons -->
+                    <Button Name="buttonDashboard" Content="   📊 Dashboard"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+                    <Button Name="buttonPiloti" Content="   🏎️ Piloti"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+                    <Button Name="buttonEchipe" Content="   🏁 Echipe"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+                    <Button Name="buttonCurse" Content="   📅 Curse"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+                    <Button Name="buttonClasament" Content="   🏆 Clasament Piloti"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+                    <Button Name="buttonClasamentEchipe" Content="   🏢 Clasament Echipe"
+                            Background="Transparent" Foreground="WhiteSmoke"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Cursor="Hand" />
+
+                    <!-- Logout at bottom -->
+                    <Button Name="buttonLogout" Content="   🚪 Logout"
+                            Background="Transparent" Foreground="#c85050"
+                            FontSize="14" Height="46" HorizontalContentAlignment="Left"
+                            BorderThickness="0" Padding="24,0" Margin="0,300,0,10" Cursor="Hand" />
+                </StackPanel>
+            </Border>
+
+            <!-- Main content area -->
+            <DockPanel>
+                <!-- Header -->
+                <Border DockPanel.Dock="Top" Height="100" Background="#181818">
+                    <StackPanel VerticalAlignment="Center" Margin="24,0">
+                        <TextBlock Name="labelHeader" Text="Dashboard"
+                                   FontSize="28" FontWeight="Bold" Foreground="White" />
+                        <TextBlock Name="labelSubHeader" Text="Bine ai venit! Urmărește statisticile sezonului."
+                                   FontSize="14" Foreground="#d3d3d3" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Content with scroll -->
+                <ScrollViewer Background="#1b1b1b" Padding="20">
+                    <StackPanel Spacing="16">
+                        <!-- Stats Panel -->
+                        <Border Name="panelStatsTop" Background="#242424" Padding="16" CornerRadius="8">
+                            <StackPanel>
+                                <TextBlock Text="Statistici" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,0,0,8" />
+                                <WrapPanel>
+                                    <TextBlock Name="labelPilotiInregistrati" Text="Piloți înregistrați: 0"
+                                               FontSize="14" Foreground="#d3d3d3" Margin="0,0,30,0" />
+                                    <TextBlock Name="labelTotalPuncte" Text="Puncte acumulate: 0"
+                                               FontSize="14" Foreground="#d3d3d3" Margin="0,0,30,0" />
+                                    <TextBlock Name="labelUrmatoareaCursa" Text="Următoarea cursă: -"
+                                               FontSize="14" Foreground="#e61c2b" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Top 3 Piloti -->
+                        <Border Name="panelTopPiloti" Background="#1e1e1e" Padding="16" CornerRadius="8">
+                            <StackPanel>
+                                <TextBlock Text="Top 3 Piloți" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,0,0,12" />
+                                <WrapPanel>
+                                    <!-- #1 -->
+                                    <Border Name="panelTop1" Background="#322814" Padding="12" Width="280" Height="130" CornerRadius="6" Margin="0,0,16,0">
+                                        <StackPanel>
+                                            <TextBlock Text="#1" FontSize="24" FontWeight="Bold" Foreground="Gold" />
+                                            <TextBlock Name="labelTop1Nume" Text="-" FontSize="16" FontWeight="Bold" Foreground="White" />
+                                            <TextBlock Name="labelTop1Echipa" Text="-" FontSize="13" Foreground="#d3d3d3" />
+                                            <TextBlock Name="labelTop1Puncte" Text="0 P" FontSize="20" FontWeight="Bold" Foreground="Gold"
+                                                       HorizontalAlignment="Right" Margin="0,-40,0,0" />
+                                        </StackPanel>
+                                    </Border>
+                                    <!-- #2 -->
+                                    <Border Name="panelTop2" Background="#242428" Padding="12" Width="280" Height="130" CornerRadius="6" Margin="0,0,16,0">
+                                        <StackPanel>
+                                            <TextBlock Text="#2" FontSize="24" FontWeight="Bold" Foreground="Silver" />
+                                            <TextBlock Name="labelTop2Nume" Text="-" FontSize="16" FontWeight="Bold" Foreground="White" />
+                                            <TextBlock Name="labelTop2Echipa" Text="-" FontSize="13" Foreground="#d3d3d3" />
+                                            <TextBlock Name="labelTop2Puncte" Text="0 P" FontSize="20" FontWeight="Bold" Foreground="Silver"
+                                                       HorizontalAlignment="Right" Margin="0,-40,0,0" />
+                                        </StackPanel>
+                                    </Border>
+                                    <!-- #3 -->
+                                    <Border Name="panelTop3" Background="#241e1c" Padding="12" Width="280" Height="130" CornerRadius="6">
+                                        <StackPanel>
+                                            <TextBlock Text="#3" FontSize="24" FontWeight="Bold" Foreground="#cd7f32" />
+                                            <TextBlock Name="labelTop3Nume" Text="-" FontSize="16" FontWeight="Bold" Foreground="White" />
+                                            <TextBlock Name="labelTop3Echipa" Text="-" FontSize="13" Foreground="#d3d3d3" />
+                                            <TextBlock Name="labelTop3Puncte" Text="0 P" FontSize="20" FontWeight="Bold" Foreground="#cd7f32"
+                                                       HorizontalAlignment="Right" Margin="0,-40,0,0" />
+                                        </StackPanel>
+                                    </Border>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Action Buttons -->
+                        <WrapPanel>
+                            <Button Name="btnVeziClasamentComplet" Content="📋 Vezi Clasament Complet"
+                                    Background="#202020" Foreground="WhiteSmoke" FontSize="14"
+                                    Height="40" Width="220" BorderThickness="0" Cursor="Hand" Margin="0,0,12,0" />
+                            <Button Name="btnVeziCalendarComplet" Content="📅 Vezi Calendar Complet"
+                                    Background="#202020" Foreground="WhiteSmoke" FontSize="14"
+                                    Height="40" Width="220" BorderThickness="0" Cursor="Hand" />
+                        </WrapPanel>
+
+                        <!-- Calendar & Results side by side -->
+                        <WrapPanel>
+                            <!-- Calendar -->
+                            <Border Name="panelCalendarPreview" Background="#1e1e1e" Padding="16" Width="435" CornerRadius="8" Margin="0,0,20,0">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Calendar Curse" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                    <TextBlock Name="labelCursa1" Text="Cursa 1 - Data" FontSize="14" Foreground="#d3d3d3" />
+                                    <TextBlock Name="labelCursa2" Text="Cursa 2 - Data" FontSize="14" Foreground="#d3d3d3" />
+                                    <TextBlock Name="labelCursa3" Text="Cursa 3 - Data" FontSize="14" Foreground="#d3d3d3" />
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Results -->
+                            <Border Name="panelResultsPreview" Background="#1e1e1e" Padding="16" Width="435" CornerRadius="8">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Ultime Rezultate" FontSize="18" FontWeight="Bold" Foreground="White" />
+                                    <TextBlock Name="labelRezultatCursa" Text="-" FontSize="13" FontStyle="Italic" Foreground="#e61c2b" />
+                                    <TextBlock Name="labelRezultat1" Text="1. -" FontSize="14" Foreground="#d3d3d3" />
+                                    <TextBlock Name="labelRezultat2" Text="2. -" FontSize="14" Foreground="#d3d3d3" />
+                                    <TextBlock Name="labelRezultat3" Text="3. -" FontSize="14" Foreground="#d3d3d3" />
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+
+                        <!-- Bottom action buttons -->
+                        <WrapPanel>
+                            <Button Name="btnActualizeazaClasament" Content="🔄 Actualizează Clasament"
+                                    Background="#e61c2b" Foreground="White" FontSize="14" FontWeight="Bold"
+                                    Height="44" Width="260" BorderThickness="0" Cursor="Hand" />
+                        </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </DockPanel>
+    </Panel>
+</Window>

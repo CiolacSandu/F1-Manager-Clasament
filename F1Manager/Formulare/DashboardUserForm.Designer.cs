@@ -17,8 +17,12 @@ namespace F1Manager.Formulare
         {
             components = new System.ComponentModel.Container();
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Text = "Dashboard User";
+            ClientSize = new Size(1920, 1080);
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            Text = "F1 Manager - Dashboard User";
+            BackColor = Color.FromArgb(20, 20, 20);
+            StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

@@ -96,7 +96,7 @@ namespace F1Manager.Formulare
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Margin = new Padding(4);
             panelSidebar.Name = "panelSidebar";
-            panelSidebar.Size = new Size(250, 800);
+            panelSidebar.Size = new Size(250, 1080);
             panelSidebar.TabIndex = 0;
 
             // labelBrand
@@ -210,7 +210,7 @@ namespace F1Manager.Formulare
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             buttonLogout.ForeColor = Color.FromArgb(200, 80, 80);
-            buttonLogout.Location = new Point(12, 740);
+            buttonLogout.Location = new Point(12, 1000);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Size = new Size(226, 46);
             buttonLogout.TabIndex = 7;
@@ -228,7 +228,7 @@ namespace F1Manager.Formulare
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(250, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(950, 100);
+            panelHeader.Size = new Size(1670, 100);
             panelHeader.TabIndex = 1;
 
             // labelHeader
@@ -266,7 +266,7 @@ namespace F1Manager.Formulare
             panelContent.Location = new Point(250, 100);
             panelContent.Name = "panelContent";
             panelContent.Padding = new Padding(20);
-            panelContent.Size = new Size(950, 700);
+            panelContent.Size = new Size(1670, 980);
             panelContent.TabIndex = 2;
 
             // panelStatsTop
@@ -278,7 +278,7 @@ namespace F1Manager.Formulare
             panelStatsTop.Location = new Point(20, 20);
             panelStatsTop.Name = "panelStatsTop";
             panelStatsTop.Padding = new Padding(16);
-            panelStatsTop.Size = new Size(890, 100);
+            panelStatsTop.Size = new Size(1600, 100);
             panelStatsTop.TabIndex = 0;
 
             // labelStatsTitle
@@ -328,7 +328,7 @@ namespace F1Manager.Formulare
             panelTopPiloti.Location = new Point(20, 136);
             panelTopPiloti.Name = "panelTopPiloti";
             panelTopPiloti.Padding = new Padding(16);
-            panelTopPiloti.Size = new Size(890, 200);
+            panelTopPiloti.Size = new Size(1600, 200);
             panelTopPiloti.TabIndex = 1;
 
             // labelTopPilotiTitle
@@ -347,7 +347,7 @@ namespace F1Manager.Formulare
             panelTop3.Controls.Add(panelTop3_3);
             panelTop3.Location = new Point(16, 48);
             panelTop3.Name = "panelTop3";
-            panelTop3.Size = new Size(858, 140);
+            panelTop3.Size = new Size(1568, 140);
             panelTop3.TabIndex = 1;
 
             // panelTop3_1 - POZITIA 1
@@ -359,7 +359,7 @@ namespace F1Manager.Formulare
             panelTop3_1.Controls.Add(labelTop1Poz);
             panelTop3_1.Location = new Point(0, 0);
             panelTop3_1.Name = "panelTop3_1";
-            panelTop3_1.Size = new Size(280, 130);
+            panelTop3_1.Size = new Size(510, 130);
             panelTop3_1.TabIndex = 0;
 
             labelTop1Poz.AutoSize = true;
@@ -392,7 +392,7 @@ namespace F1Manager.Formulare
             labelTop1Puncte.AutoSize = true;
             labelTop1Puncte.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             labelTop1Puncte.ForeColor = Color.Gold;
-            labelTop1Puncte.Location = new Point(180, 44);
+            labelTop1Puncte.Location = new Point(400, 44);
             labelTop1Puncte.Name = "labelTop1Puncte";
             labelTop1Puncte.Size = new Size(80, 41);
             labelTop1Puncte.TabIndex = 3;
@@ -405,9 +405,9 @@ namespace F1Manager.Formulare
             panelTop3_2.Controls.Add(labelTop2Echipa);
             panelTop3_2.Controls.Add(labelTop2Nume);
             panelTop3_2.Controls.Add(labelTop2Poz);
-            panelTop3_2.Location = new Point(290, 0);
+            panelTop3_2.Location = new Point(525, 0);
             panelTop3_2.Name = "panelTop3_2";
-            panelTop3_2.Size = new Size(280, 130);
+            panelTop3_2.Size = new Size(510, 130);
             panelTop3_2.TabIndex = 1;
 
             labelTop2Poz.AutoSize = true;
@@ -440,7 +440,7 @@ namespace F1Manager.Formulare
             labelTop2Puncte.AutoSize = true;
             labelTop2Puncte.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             labelTop2Puncte.ForeColor = Color.Silver;
-            labelTop2Puncte.Location = new Point(180, 44);
+            labelTop2Puncte.Location = new Point(400, 44);
             labelTop2Puncte.Name = "labelTop2Puncte";
             labelTop2Puncte.Size = new Size(80, 41);
             labelTop2Puncte.TabIndex = 3;
@@ -453,9 +453,9 @@ namespace F1Manager.Formulare
             panelTop3_3.Controls.Add(labelTop3Echipa);
             panelTop3_3.Controls.Add(labelTop3Nume);
             panelTop3_3.Controls.Add(labelTop3Poz);
-            panelTop3_3.Location = new Point(580, 0);
+            panelTop3_3.Location = new Point(1050, 0);
             panelTop3_3.Name = "panelTop3_3";
-            panelTop3_3.Size = new Size(280, 130);
+            panelTop3_3.Size = new Size(510, 130);
             panelTop3_3.TabIndex = 2;
 
             labelTop3Poz.AutoSize = true;
@@ -488,7 +488,7 @@ namespace F1Manager.Formulare
             labelTop3Puncte.AutoSize = true;
             labelTop3Puncte.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             labelTop3Puncte.ForeColor = Color.FromArgb(205, 127, 50);
-            labelTop3Puncte.Location = new Point(180, 44);
+            labelTop3Puncte.Location = new Point(400, 44);
             labelTop3Puncte.Name = "labelTop3Puncte";
             labelTop3Puncte.Size = new Size(80, 41);
             labelTop3Puncte.TabIndex = 3;
@@ -502,7 +502,7 @@ namespace F1Manager.Formulare
             btnAdaugaPilot.ForeColor = Color.White;
             btnAdaugaPilot.Location = new Point(20, 352);
             btnAdaugaPilot.Name = "btnAdaugaPilot";
-            btnAdaugaPilot.Size = new Size(180, 40);
+            btnAdaugaPilot.Size = new Size(200, 46);
             btnAdaugaPilot.TabIndex = 2;
             btnAdaugaPilot.Text = "+ Adaugă Pilot";
             btnAdaugaPilot.UseVisualStyleBackColor = false;
@@ -515,9 +515,9 @@ namespace F1Manager.Formulare
             btnVeziClasamentComplet.FlatStyle = FlatStyle.Flat;
             btnVeziClasamentComplet.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnVeziClasamentComplet.ForeColor = Color.WhiteSmoke;
-            btnVeziClasamentComplet.Location = new Point(210, 352);
+            btnVeziClasamentComplet.Location = new Point(240, 352);
             btnVeziClasamentComplet.Name = "btnVeziClasamentComplet";
-            btnVeziClasamentComplet.Size = new Size(200, 40);
+            btnVeziClasamentComplet.Size = new Size(220, 46);
             btnVeziClasamentComplet.TabIndex = 3;
             btnVeziClasamentComplet.Text = "📋 Vezi Clasament Complet";
             btnVeziClasamentComplet.UseVisualStyleBackColor = false;
@@ -532,10 +532,10 @@ namespace F1Manager.Formulare
             panelCalendarPreview.Controls.Add(labelCursa2);
             panelCalendarPreview.Controls.Add(labelCursa1);
             panelCalendarPreview.Controls.Add(labelCalendarTitle);
-            panelCalendarPreview.Location = new Point(20, 408);
+            panelCalendarPreview.Location = new Point(20, 414);
             panelCalendarPreview.Name = "panelCalendarPreview";
             panelCalendarPreview.Padding = new Padding(16);
-            panelCalendarPreview.Size = new Size(435, 210);
+            panelCalendarPreview.Size = new Size(780, 240);
             panelCalendarPreview.TabIndex = 4;
 
             // labelCalendarTitle
@@ -562,7 +562,7 @@ namespace F1Manager.Formulare
             labelCursa2.AutoSize = true;
             labelCursa2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             labelCursa2.ForeColor = Color.LightGray;
-            labelCursa2.Location = new Point(16, 90);
+            labelCursa2.Location = new Point(16, 94);
             labelCursa2.Name = "labelCursa2";
             labelCursa2.Size = new Size(150, 25);
             labelCursa2.TabIndex = 2;
@@ -572,7 +572,7 @@ namespace F1Manager.Formulare
             labelCursa3.AutoSize = true;
             labelCursa3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             labelCursa3.ForeColor = Color.LightGray;
-            labelCursa3.Location = new Point(16, 124);
+            labelCursa3.Location = new Point(16, 132);
             labelCursa3.Name = "labelCursa3";
             labelCursa3.Size = new Size(150, 25);
             labelCursa3.TabIndex = 3;
@@ -584,9 +584,9 @@ namespace F1Manager.Formulare
             btnVeziCalendarComplet.FlatStyle = FlatStyle.Flat;
             btnVeziCalendarComplet.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnVeziCalendarComplet.ForeColor = Color.WhiteSmoke;
-            btnVeziCalendarComplet.Location = new Point(240, 158);
+            btnVeziCalendarComplet.Location = new Point(550, 180);
             btnVeziCalendarComplet.Name = "btnVeziCalendarComplet";
-            btnVeziCalendarComplet.Size = new Size(180, 36);
+            btnVeziCalendarComplet.Size = new Size(210, 44);
             btnVeziCalendarComplet.TabIndex = 4;
             btnVeziCalendarComplet.Text = "📅 Vezi Calendar Complet";
             btnVeziCalendarComplet.UseVisualStyleBackColor = false;
@@ -602,10 +602,10 @@ namespace F1Manager.Formulare
             panelResultsPreview.Controls.Add(labelRezultat2);
             panelResultsPreview.Controls.Add(labelRezultat1);
             panelResultsPreview.Controls.Add(labelResultsTitle);
-            panelResultsPreview.Location = new Point(475, 408);
+            panelResultsPreview.Location = new Point(820, 414);
             panelResultsPreview.Name = "panelResultsPreview";
             panelResultsPreview.Padding = new Padding(16);
-            panelResultsPreview.Size = new Size(435, 210);
+            panelResultsPreview.Size = new Size(780, 240);
             panelResultsPreview.TabIndex = 5;
 
             // labelResultsTitle
@@ -632,7 +632,7 @@ namespace F1Manager.Formulare
             labelRezultat1.AutoSize = true;
             labelRezultat1.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             labelRezultat1.ForeColor = Color.LightGray;
-            labelRezultat1.Location = new Point(16, 76);
+            labelRezultat1.Location = new Point(16, 80);
             labelRezultat1.Name = "labelRezultat1";
             labelRezultat1.Size = new Size(100, 25);
             labelRezultat1.TabIndex = 2;
@@ -642,7 +642,7 @@ namespace F1Manager.Formulare
             labelRezultat2.AutoSize = true;
             labelRezultat2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             labelRezultat2.ForeColor = Color.LightGray;
-            labelRezultat2.Location = new Point(16, 106);
+            labelRezultat2.Location = new Point(16, 115);
             labelRezultat2.Name = "labelRezultat2";
             labelRezultat2.Size = new Size(100, 25);
             labelRezultat2.TabIndex = 3;
@@ -652,7 +652,7 @@ namespace F1Manager.Formulare
             labelRezultat3.AutoSize = true;
             labelRezultat3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             labelRezultat3.ForeColor = Color.LightGray;
-            labelRezultat3.Location = new Point(16, 136);
+            labelRezultat3.Location = new Point(16, 150);
             labelRezultat3.Name = "labelRezultat3";
             labelRezultat3.Size = new Size(100, 25);
             labelRezultat3.TabIndex = 4;
@@ -664,9 +664,9 @@ namespace F1Manager.Formulare
             btnVeziRezultateComplet.FlatStyle = FlatStyle.Flat;
             btnVeziRezultateComplet.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnVeziRezultateComplet.ForeColor = Color.WhiteSmoke;
-            btnVeziRezultateComplet.Location = new Point(240, 158);
+            btnVeziRezultateComplet.Location = new Point(550, 180);
             btnVeziRezultateComplet.Name = "btnVeziRezultateComplet";
-            btnVeziRezultateComplet.Size = new Size(180, 36);
+            btnVeziRezultateComplet.Size = new Size(210, 44);
             btnVeziRezultateComplet.TabIndex = 5;
             btnVeziRezultateComplet.Text = "📊 Vezi Rezultate Complet";
             btnVeziRezultateComplet.UseVisualStyleBackColor = false;
@@ -680,9 +680,9 @@ namespace F1Manager.Formulare
             btnActualizeazaClasament.FlatStyle = FlatStyle.Flat;
             btnActualizeazaClasament.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             btnActualizeazaClasament.ForeColor = Color.White;
-            btnActualizeazaClasament.Location = new Point(20, 634);
+            btnActualizeazaClasament.Location = new Point(20, 670);
             btnActualizeazaClasament.Name = "btnActualizeazaClasament";
-            btnActualizeazaClasament.Size = new Size(280, 44);
+            btnActualizeazaClasament.Size = new Size(280, 50);
             btnActualizeazaClasament.TabIndex = 6;
             btnActualizeazaClasament.Text = "🔄 Actualizează Clasament";
             btnActualizeazaClasament.UseVisualStyleBackColor = false;
@@ -695,9 +695,9 @@ namespace F1Manager.Formulare
             btnBackup.FlatStyle = FlatStyle.Flat;
             btnBackup.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             btnBackup.ForeColor = Color.WhiteSmoke;
-            btnBackup.Location = new Point(320, 634);
+            btnBackup.Location = new Point(320, 670);
             btnBackup.Name = "btnBackup";
-            btnBackup.Size = new Size(200, 44);
+            btnBackup.Size = new Size(220, 50);
             btnBackup.TabIndex = 7;
             btnBackup.Text = "💾 Backup Date";
             btnBackup.UseVisualStyleBackColor = false;
@@ -709,12 +709,12 @@ namespace F1Manager.Formulare
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
-            ClientSize = new Size(1200, 800);
+            ClientSize = new Size(1920, 1080);
             Controls.Add(panelContent);
             Controls.Add(panelHeader);
             Controls.Add(panelSidebar);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MinimumSize = new Size(1200, 800);
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
             Name = "DashboardAdminForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "F1 Manager - Dashboard Admin";

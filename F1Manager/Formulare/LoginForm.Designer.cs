@@ -13,6 +13,7 @@ namespace F1Manager.Formulare
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegisterLink;
+        private System.Windows.Forms.Button btnToggleTheme;
 
         protected override void Dispose(bool disposing)
         {
@@ -35,6 +36,7 @@ namespace F1Manager.Formulare
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegisterLink = new System.Windows.Forms.Button();
+            this.btnToggleTheme = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +70,22 @@ namespace F1Manager.Formulare
             this.lblAppTitle.Size = new System.Drawing.Size(180, 28);
             this.lblAppTitle.TabIndex = 0;
             this.lblAppTitle.Text = "F1 Manager și Clasament";
+            // 
+            // btnToggleTheme
+            // 
+            this.btnToggleTheme.BackColor = System.Drawing.Color.Transparent;
+            this.btnToggleTheme.FlatAppearance.BorderSize = 0;
+            this.btnToggleTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggleTheme.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnToggleTheme.ForeColor = System.Drawing.Color.FromArgb(60, 60, 60);
+            this.btnToggleTheme.Location = new System.Drawing.Point(385, 5);
+            this.btnToggleTheme.Name = "btnToggleTheme";
+            this.btnToggleTheme.Size = new System.Drawing.Size(55, 30);
+            this.btnToggleTheme.TabIndex = 8;
+            this.btnToggleTheme.Text = "🌙";
+            this.btnToggleTheme.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnToggleTheme.UseVisualStyleBackColor = true;
+            this.btnToggleTheme.Click += new System.EventHandler(this.btnToggleTheme_Click);
             // 
             // lblTitle
             // 
@@ -155,6 +173,7 @@ namespace F1Manager.Formulare
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.ClientSize = new System.Drawing.Size(450, 380);
+            this.Controls.Add(this.btnToggleTheme);
             this.Controls.Add(this.btnRegisterLink);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblTitle);

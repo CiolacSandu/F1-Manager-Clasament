@@ -1,6 +1,7 @@
 using System.Data;
 using F1Manager.BazaDeDate;
 using F1Manager.Modele;
+using MySql.Data.MySqlClient;
 
 namespace F1Manager.Servicii
 {
@@ -72,13 +73,13 @@ namespace F1Manager.Servicii
         public List<Clasament> GetRezultateByCursa(int cursaId)
         {
             var list = new List<Clasament>();
-            string query = @"
+            string query = $@"
                 SELECT cl.PozitieFinala, cl.Puncte, p.Nume AS NumePilot, e.Nume AS NumeEchipa, c.NumeCursa
                 FROM clasament cl
                 JOIN piloti p ON cl.PilotID = p.PilotID
                 LEFT JOIN echipe e ON p.EchipaID = e.EchipaID
                 JOIN curse c ON cl.CursaID = c.CursaID
-                WHERE cl.CursaID = @cursaId
+                WHERE cl.CursaID = {cursaId}
                 ORDER BY cl.PozitieFinala ASC";
             
             DataTable dt = db.ExecuteQuery(query);
@@ -174,6 +175,27 @@ namespace F1Manager.Servicii
             };
         }
 
+        public Cursa? GetCursaById(int cursaId)
+        {
+            string query = $@"
+                SELECT c.CursaID, c.NumeCursa, c.Locatie, c.DataCursa, c.NumarTure
+                FROM curse c
+                WHERE c.CursaID = {cursaId}";
+            DataTable dt = db.ExecuteQuery(query);
+            if (dt == null || dt.Rows.Count == 0) return null;
+
+            DataRow row = dt.Rows[0];
+            return new Cursa
+            {
+                CursaID = Convert.ToInt32(row["CursaID"]),
+                NumeCursa = row["NumeCursa"]?.ToString() ?? "",
+                Locatie = row["Locatie"]?.ToString(),
+                DataCursa = row["DataCursa"] != DBNull.Value ? Convert.ToDateTime(row["DataCursa"]) : null,
+                NumarTure = row["NumarTure"] != DBNull.Value ? Convert.ToInt32(row["NumarTure"]) : null,
+                Status = "Finalizata"
+            };
+        }
+
         public int GetNumarPilotiInregistrati()
         {
             object result = db.ExecuteScalar("SELECT COUNT(*) FROM piloti");
@@ -188,7 +210,6 @@ namespace F1Manager.Servicii
 
         public void ActualizeazaClasament()
         {
-            // This is handled manually - the clasament table already has data
             System.Windows.Forms.MessageBox.Show("Clasamentul este deja actualizat.", "Info", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
         }
 
@@ -203,17 +224,107 @@ namespace F1Manager.Servicii
                 string fileName = $"Backup_F1Manager_{DateTime.Now:yyyyMMdd_HHmmss}.sql";
                 string filePath = Path.Combine(backupDir, fileName);
 
-                string backupQuery = @"
-                    SELECT * INTO OUTFILE '" + filePath.Replace("\\", "\\\\") + @"'
-                    FIELDS TERMINATED BY ',' ENCLOSED BY '""' LINES TERMINATED BY '\n'
-                    FROM clasament";
-                
                 System.Windows.Forms.MessageBox.Show($"Backup salvat în: {filePath}", "Backup", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Eroare la backup: " + ex.Message, "Eroare", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// Finalizează următoarea cursă programată, generând automat clasament randomizat pentru toți piloții.
+        /// </summary>
+        /// <returns>Cursa finalizată, sau null dacă nu există curse programate.</returns>
+        public Cursa? FinalizeazaUrmatoareaCursa()
+        {
+            // Get the next upcoming race
+            var nextRace = GetUrmatoareaCursa();
+            if (nextRace == null)
+                return null;
+
+            // Get all pilots with random ordering
+            string getPilotsQuery = @"
+                SELECT p.PilotID 
+                FROM piloti p 
+                ORDER BY RAND()";
+            DataTable dtPiloti = db.ExecuteQuery(getPilotsQuery);
+            if (dtPiloti == null || dtPiloti.Rows.Count == 0)
+                return null;
+
+            // F1 Point system: 25, 18, 15, 12, 10, 8, 6, 4, 2, 1, then 0 for the rest
+            int[] points = { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
+
+            // Insert results for each pilot
+            for (int i = 0; i < dtPiloti.Rows.Count; i++)
+            {
+                int pilotId = Convert.ToInt32(dtPiloti.Rows[i]["PilotID"]);
+                int position = i + 1;
+                int puncte = i < points.Length ? points[i] : 0;
+
+                string insertQuery = @"
+                    INSERT INTO clasament (PilotID, CursaID, PozitieFinala, Puncte)
+                    VALUES (@pilotId, @cursaId, @pozitie, @puncte)";
+
+                db.ExecuteNonQuery(insertQuery, new MySqlParameter[]
+                {
+                    new MySqlParameter("@pilotId", pilotId),
+                    new MySqlParameter("@cursaId", nextRace.CursaID),
+                    new MySqlParameter("@pozitie", position),
+                    new MySqlParameter("@puncte", puncte)
+                });
+            }
+
+            nextRace.Status = "Finalizata";
+            return nextRace;
+        }
+
+        /// <summary>
+        /// Adaugă următoarea cursă în calendar (cu 7 zile după ultima cursă din calendar).
+        /// </summary>
+        /// <returns>Cursa adăugată, sau null dacă nu s-a putut adăuga.</returns>
+        public Cursa? AdaugaUrmatoareaCursa()
+        {
+            // Get the last race date to determine next race date
+            string getLastDateQuery = "SELECT MAX(DataCursa) FROM curse";
+            object lastDateObj = db.ExecuteScalar(getLastDateQuery);
+            
+            DateTime nextDate;
+            if (lastDateObj != null && lastDateObj != DBNull.Value)
+            {
+                nextDate = Convert.ToDateTime(lastDateObj).AddDays(7);
+            }
+            else
+            {
+                nextDate = DateTime.Now.AddDays(7);
+            }
+
+            // Determine the next race number
+            string countQuery = "SELECT COUNT(*) FROM curse";
+            object countObj = db.ExecuteScalar(countQuery);
+            int raceCount = countObj != null ? Convert.ToInt32(countObj) : 0;
+            int nextRaceNumber = raceCount + 1;
+
+            string numeCursa = $"Grand Prix {nextRaceNumber}";
+            string locatie = "Circuit";
+            string dataFormatted = nextDate.ToString("yyyy-MM-dd");
+
+            string insertQuery = @"
+                INSERT INTO curse (NumeCursa, Locatie, DataCursa, NumarTure)
+                VALUES (@nume, @locatie, @data, @ture)";
+
+            int numarTure = 50; // default number of laps
+
+            db.ExecuteNonQuery(insertQuery, new MySqlParameter[]
+            {
+                new MySqlParameter("@nume", numeCursa),
+                new MySqlParameter("@locatie", locatie),
+                new MySqlParameter("@data", nextDate),
+                new MySqlParameter("@ture", numarTure)
+            });
+
+            // Return the newly created race
+            return GetUrmatoareaCursa();
         }
     }
 }

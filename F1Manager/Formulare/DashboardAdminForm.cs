@@ -19,6 +19,7 @@ namespace F1Manager.Formulare
 
         private void DashboardAdminForm_Load(object sender, EventArgs e)
         {
+            ThemeManager.ApplyTheme(this);
             LoadDashboardData();
             ApplyDefaultHoverStyles();
         }
@@ -65,35 +66,29 @@ namespace F1Manager.Formulare
                     labelTop3Puncte.Text = $"{clasament[2].Puncte} P";
                 }
 
-                // Calendar - upcoming 3 races
+                // Calendar - upcoming 5 races
                 var upcomingRaces = clasamentService.GetCurseUrmatoare();
                 int idx = 0;
-                string[] labels = { labelCursa1.Text, labelCursa2.Text, labelCursa3.Text };
+                Label[] cursaLabels = { labelCursa1, labelCursa2, labelCursa3, labelCursa4, labelCursa5 };
                 foreach (var race in upcomingRaces)
                 {
-                    if (idx >= 3) break;
-                    if (idx == 0) labelCursa1.Text = $"{race.NumeCursa} - {race.DataFormatted}";
-                    else if (idx == 1) labelCursa2.Text = $"{race.NumeCursa} - {race.DataFormatted}";
-                    else if (idx == 2) labelCursa3.Text = $"{race.NumeCursa} - {race.DataFormatted}";
+                    if (idx >= 5) break;
+                    cursaLabels[idx].Text = $"{race.NumeCursa} - {race.DataFormatted}";
                     idx++;
+                }
+                for (int i = idx; i < 5; i++)
+                {
+                    if (i == 0 && upcomingRaces.Count == 0)
+                        cursaLabels[i].Text = "Nu sunt curse programate";
+                    else
+                        cursaLabels[i].Text = "";
                 }
                 if (upcomingRaces.Count == 0)
                 {
                     labelCursa1.Text = "Nu sunt curse programate";
-                    labelCursa2.Text = "";
-                    labelCursa3.Text = "";
-                }
-                else if (upcomingRaces.Count == 1)
-                {
-                    labelCursa2.Text = "";
-                    labelCursa3.Text = "";
-                }
-                else if (upcomingRaces.Count == 2)
-                {
-                    labelCursa3.Text = "";
                 }
 
-                // Latest results
+                // Latest results - Top 3 pilots
                 var racesWithResults = clasamentService.GetCurseCuRezultate();
                 if (racesWithResults.Count > 0)
                 {
@@ -101,7 +96,7 @@ namespace F1Manager.Formulare
                     labelRezultatCursa.Text = lastRace.NumeCursa;
 
                     var results = clasamentService.GetRezultateByCursa(lastRace.CursaID);
-                    if (results.Count >= 1)
+                if (results.Count >= 1)
                         labelRezultat1.Text = $"1. {results[0].NumePilot}";
                     if (results.Count >= 2)
                         labelRezultat2.Text = $"2. {results[1].NumePilot}";
@@ -222,6 +217,86 @@ namespace F1Manager.Formulare
             form.Show();
         }
 
+        private void btnFinalizeazaCursa_Click(object sender, EventArgs e)
+        {
+            var nextRace = clasamentService.GetUrmatoareaCursa();
+            if (nextRace == null)
+            {
+                MessageBox.Show("Nu există curse programate de finalizat.\nAdaugă mai întâi o cursă nouă.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Ești sigur că vrei să finalizezi cursa \"{nextRace.NumeCursa}\" din data de {nextRace.DataFormatted}?\nSe va genera un clasament automat pentru toți piloții.",
+                "Finalizează Cursa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var cursaFinalizata = clasamentService.FinalizeazaUrmatoareaCursa();
+                if (cursaFinalizata != null)
+                {
+                    MessageBox.Show(
+                        $"Cursa \"{cursaFinalizata.NumeCursa}\" a fost finalizată cu succes!\nClasamentul a fost generat automat.\n\nVezi rezultatele în secțiunea de clasament.",
+                        "Cursă Finalizată",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    // Reîncarcă dashboard-ul
+                    LoadDashboardData();
+                }
+                else
+                {
+                    MessageBox.Show("Nu s-a putut finaliza cursa. Verifică să existe piloți înregistrați.", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnVeziRezultate_Click(object sender, EventArgs e)
+        {
+            var racesWithResults = clasamentService.GetCurseCuRezultate();
+            if (racesWithResults.Count > 0)
+            {
+                // Show the most recent race results in a ClasamentForm
+                ClasamentForm form = new ClasamentForm("Rezultate", racesWithResults[0].CursaID);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nu există rezultate pentru nicio cursă. Finalizează mai întâi o cursă.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnUrmatoareaCursa_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Ești sigur că vrei să adaugi următoarea cursă în calendar?",
+                "Adaugă Următoarea Cursă",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var cursaAdaugata = clasamentService.AdaugaUrmatoareaCursa();
+                if (cursaAdaugata != null)
+                {
+                    MessageBox.Show(
+                        $"Cursa \"{cursaAdaugata.NumeCursa}\" a fost adăugată pentru data de {cursaAdaugata.DataFormatted}.",
+                        "Cursă Adăugată",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    // Reîncarcă dashboard-ul
+                    LoadDashboardData();
+                }
+                else
+                {
+                    MessageBox.Show("Nu s-a putut adăuga cursa.", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void btnVeziClasamentComplet_Click(object sender, EventArgs e)
         {
             ClasamentForm form = new ClasamentForm("Piloti");
@@ -257,6 +332,14 @@ namespace F1Manager.Formulare
         private void btnBackup_Click(object sender, EventArgs e)
         {
             clasamentService.BackupDatabase();
+        }
+
+        private void btnToggleTheme_Click(object sender, EventArgs e)
+        {
+            ThemeManager.ToggleTheme();
+            ThemeManager.ApplyTheme(this);
+            ThemeManager.ApplyThemeToAllOpenForms();
+            btnToggleTheme.Text = ThemeManager.IsDarkMode ? "🌙" : "☀️";
         }
     }
 }

@@ -18,6 +18,7 @@ namespace F1Manager.Formulare
             components = new System.ComponentModel.Container();
             dataGridView = new DataGridView();
             labelTitle = new Label();
+            labelSubTitle = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
 
@@ -31,11 +32,20 @@ namespace F1Manager.Formulare
             labelTitle.TabIndex = 0;
             labelTitle.Text = "Clasament";
 
+            // labelSubTitle
+            labelSubTitle.AutoSize = true;
+            labelSubTitle.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSubTitle.ForeColor = Color.LightGray;
+            labelSubTitle.Location = new Point(24, 72);
+            labelSubTitle.Name = "labelSubTitle";
+            labelSubTitle.Size = new Size(0, 23);
+            labelSubTitle.TabIndex = 1;
+
             // dataGridView
-            dataGridView.Location = new Point(24, 80);
+            dataGridView.Location = new Point(24, 110);
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(940, 480);
-            dataGridView.TabIndex = 1;
+            dataGridView.Size = new Size(940, 450);
+            dataGridView.TabIndex = 2;
 
             // ClasamentForm
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -43,6 +53,7 @@ namespace F1Manager.Formulare
             BackColor = Color.FromArgb(27, 27, 27);
             ClientSize = new Size(1000, 600);
             Controls.Add(labelTitle);
+            Controls.Add(labelSubTitle);
             Controls.Add(dataGridView);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "ClasamentForm";
@@ -56,5 +67,6 @@ namespace F1Manager.Formulare
 
         private DataGridView dataGridView;
         private Label labelTitle;
+        private Label labelSubTitle;
     }
 }

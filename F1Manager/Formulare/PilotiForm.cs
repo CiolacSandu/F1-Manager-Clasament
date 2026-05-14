@@ -11,16 +11,28 @@ namespace F1Manager.Formulare
         private PilotService pilotService = new PilotService();
         private EchipaService echipaService = new EchipaService();
         private int? editId = null;
+        private bool readOnly = false;
 
-        public PilotiForm()
+        public PilotiForm(bool readOnly = false)
         {
             InitializeComponent();
+            this.readOnly = readOnly;
         }
 
         private void PilotiForm_Load(object sender, EventArgs e)
         {
             LoadTeams();
             LoadData();
+
+            if (readOnly)
+            {
+                btnAdauga.Visible = false;
+                btnEditeaza.Visible = false;
+                btnSterge.Visible = false;
+                panelForm.Visible = false;
+                // Extend DataGridView width to fill the space
+                dataGridView.Width = 920;
+            }
         }
 
         private void LoadTeams()

@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace F1Manager.Modele
 {
     public class Cursa
@@ -8,6 +10,8 @@ namespace F1Manager.Modele
         public DateTime? DataCursa { get; set; }
         public int? NumarTure { get; set; }
         public string? Status { get; set; } // Computed: "Finalizata" if has results, else "Programata"
-        public string DataFormatted => DataCursa.HasValue ? DataCursa.Value.ToString("dd MMM yyyy") : "N/A";
+        public string DataFormatted => DataCursa.HasValue 
+            ? DataCursa.Value.ToString("dd MMM yyyy", new CultureInfo("ro-RO")) 
+            : "N/A";
     }
 }

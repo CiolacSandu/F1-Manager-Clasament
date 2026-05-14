@@ -10,15 +10,26 @@ namespace F1Manager.Formulare
     {
         private EchipaService echipaService = new EchipaService();
         private int? editId = null;
+        private bool readOnly = false;
 
-        public EchipeForm()
+        public EchipeForm(bool readOnly = false)
         {
             InitializeComponent();
+            this.readOnly = readOnly;
         }
 
         private void EchipeForm_Load(object sender, EventArgs e)
         {
             LoadData();
+
+            if (readOnly)
+            {
+                btnAdauga.Visible = false;
+                btnEditeaza.Visible = false;
+                btnSterge.Visible = false;
+                panelForm.Visible = false;
+                dataGridView.Width = 920;
+            }
         }
 
         private void LoadData()

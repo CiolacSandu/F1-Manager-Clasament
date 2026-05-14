@@ -56,18 +56,26 @@ namespace F1Manager.Formulare
             try
             {
                 dataGridView.Columns.Clear();
+                labelSubTitle.Text = "";
 
                 if (tipClasament == "Rezultate" && cursaId.HasValue)
                 {
                     var rezultate = clasamentService.GetRezultateByCursa(cursaId.Value);
                     if (rezultate.Count > 0)
                     {
-                        labelTitle.Text = $"Rezultate: {rezultate[0].NumeCursa}";
+                        labelTitle.Text = $"🏁 Rezultate: {rezultate[0].NumeCursa}";
                     }
 
-                    dataGridView.Columns.Add("Pozitie", "#");
+                    // Get race details
+                    var cursa = clasamentService.GetCursaById(cursaId.Value);
+                    if (cursa != null)
+                    {
+                        labelSubTitle.Text = $"📍 {cursa.Locatie ?? "Necunoscută"}  |  📅 {cursa.DataFormatted}  |  🏎️ {cursa.NumarTure ?? 0} ture";
+                    }
+
+                    dataGridView.Columns.Add("Pozitie", "Poziție");
                     dataGridView.Columns.Add("Pilot", "Pilot");
-                    dataGridView.Columns.Add("Echipa", "Echipa");
+                    dataGridView.Columns.Add("Echipa", "Echipă");
                     dataGridView.Columns.Add("Puncte", "Puncte");
 
                     foreach (var r in rezultate)
@@ -77,9 +85,9 @@ namespace F1Manager.Formulare
                 }
                 else if (tipClasament == "Echipe")
                 {
-                    labelTitle.Text = "Clasament Echipe";
-                    dataGridView.Columns.Add("Pozitie", "#");
-                    dataGridView.Columns.Add("Echipa", "Echipa");
+                    labelTitle.Text = "🏢 Clasament Echipe";
+                    dataGridView.Columns.Add("Pozitie", "Poziție");
+                    dataGridView.Columns.Add("Echipa", "Echipă");
                     dataGridView.Columns.Add("Puncte", "Puncte");
 
                     var echipe = clasamentService.GetClasamentEchipe();
@@ -91,10 +99,10 @@ namespace F1Manager.Formulare
                 }
                 else // Piloti
                 {
-                    labelTitle.Text = "Clasament Piloti";
-                    dataGridView.Columns.Add("Pozitie", "#");
+                    labelTitle.Text = "🏆 Clasament Piloti";
+                    dataGridView.Columns.Add("Pozitie", "Poziție");
                     dataGridView.Columns.Add("Pilot", "Pilot");
-                    dataGridView.Columns.Add("Echipa", "Echipa");
+                    dataGridView.Columns.Add("Echipa", "Echipă");
                     dataGridView.Columns.Add("Puncte", "Puncte");
 
                     var piloti = clasamentService.GetClasamentGeneral();

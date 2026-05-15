@@ -66,7 +66,7 @@ namespace F1Manager.Formulare
                     labelTop3Puncte.Text = $"{clasament[2].Puncte} P";
                 }
 
-                // Calendar - upcoming 5 races
+                
                 var upcomingRaces = clasamentService.GetCurseUrmatoare();
                 int idx = 0;
                 Label[] cursaLabels = { labelCursa1, labelCursa2, labelCursa3, labelCursa4, labelCursa5 };
@@ -88,11 +88,11 @@ namespace F1Manager.Formulare
                     labelCursa1.Text = "Nu sunt curse programate";
                 }
 
-                // Latest results - Top 3 pilots
+                // Top 3 piloti
                 var racesWithResults = clasamentService.GetCurseCuRezultate();
                 if (racesWithResults.Count > 0)
                 {
-                    var lastRace = racesWithResults[0]; // most recent
+                    var lastRace = racesWithResults[0]; 
                     labelRezultatCursa.Text = lastRace.NumeCursa;
 
                     var results = clasamentService.GetRezultateByCursa(lastRace.CursaID);
@@ -258,7 +258,7 @@ namespace F1Manager.Formulare
             var racesWithResults = clasamentService.GetCurseCuRezultate();
             if (racesWithResults.Count > 0)
             {
-                // Show the most recent race results in a ClasamentForm
+                
                 ClasamentForm form = new ClasamentForm("Rezultate", racesWithResults[0].CursaID);
                 form.Show();
             }
@@ -287,7 +287,7 @@ namespace F1Manager.Formulare
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
-                    // Reîncarcă dashboard-ul
+                    
                     LoadDashboardData();
                 }
                 else

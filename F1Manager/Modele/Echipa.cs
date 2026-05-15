@@ -7,6 +7,6 @@ namespace F1Manager.Modele
         public string? Tara { get; set; }
         public string? DirectorEchipa { get; set; }
         public decimal? Buget { get; set; }
-        public int Puncte { get; set; } // calculated from clasament
+        public int Puncte { get; set; } 
     }
 }

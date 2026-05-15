@@ -232,18 +232,15 @@ namespace F1Manager.Servicii
             }
         }
 
-        /// <summary>
-        /// Finalizează următoarea cursă programată, generând automat clasament randomizat pentru toți piloții.
-        /// </summary>
-        /// <returns>Cursa finalizată, sau null dacă nu există curse programate.</returns>
+       
         public Cursa? FinalizeazaUrmatoareaCursa()
         {
-            // Get the next upcoming race
+        
             var nextRace = GetUrmatoareaCursa();
             if (nextRace == null)
                 return null;
 
-            // Get all pilots with random ordering
+            
             string getPilotsQuery = @"
                 SELECT p.PilotID 
                 FROM piloti p 
@@ -252,10 +249,10 @@ namespace F1Manager.Servicii
             if (dtPiloti == null || dtPiloti.Rows.Count == 0)
                 return null;
 
-            // F1 Point system: 25, 18, 15, 12, 10, 8, 6, 4, 2, 1, then 0 for the rest
+           
             int[] points = { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
 
-            // Insert results for each pilot
+           
             for (int i = 0; i < dtPiloti.Rows.Count; i++)
             {
                 int pilotId = Convert.ToInt32(dtPiloti.Rows[i]["PilotID"]);
@@ -279,13 +276,11 @@ namespace F1Manager.Servicii
             return nextRace;
         }
 
-        /// <summary>
-        /// Adaugă următoarea cursă în calendar (cu 7 zile după ultima cursă din calendar).
-        /// </summary>
-        /// <returns>Cursa adăugată, sau null dacă nu s-a putut adăuga.</returns>
+    
+        
         public Cursa? AdaugaUrmatoareaCursa()
         {
-            // Get the last race date to determine next race date
+
             string getLastDateQuery = "SELECT MAX(DataCursa) FROM curse";
             object lastDateObj = db.ExecuteScalar(getLastDateQuery);
             
@@ -299,7 +294,7 @@ namespace F1Manager.Servicii
                 nextDate = DateTime.Now.AddDays(7);
             }
 
-            // Determine the next race number
+            
             string countQuery = "SELECT COUNT(*) FROM curse";
             object countObj = db.ExecuteScalar(countQuery);
             int raceCount = countObj != null ? Convert.ToInt32(countObj) : 0;
@@ -313,7 +308,7 @@ namespace F1Manager.Servicii
                 INSERT INTO curse (NumeCursa, Locatie, DataCursa, NumarTure)
                 VALUES (@nume, @locatie, @data, @ture)";
 
-            int numarTure = 50; // default number of laps
+            int numarTure = 50;
 
             db.ExecuteNonQuery(insertQuery, new MySqlParameter[]
             {
@@ -323,7 +318,7 @@ namespace F1Manager.Servicii
                 new MySqlParameter("@ture", numarTure)
             });
 
-            // Return the newly created race
+            
             return GetUrmatoareaCursa();
         }
     }

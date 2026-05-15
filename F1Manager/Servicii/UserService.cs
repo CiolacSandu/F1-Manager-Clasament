@@ -10,7 +10,7 @@ namespace F1Manager.Servicii
 
         DbConnection db = new DbConnection();
 
-        // REGISTER
+        
         public bool Register(User user)
         {
             LastError = null;
@@ -45,7 +45,7 @@ namespace F1Manager.Servicii
             }
         }
 
-        // LOGIN
+        
         public string? Login(string username, string password)
         {
             LastError = null;

@@ -66,7 +66,7 @@ namespace F1Manager.Formulare
                         labelTitle.Text = $"🏁 Rezultate: {rezultate[0].NumeCursa}";
                     }
 
-                    // Get race details
+                
                     var cursa = clasamentService.GetCursaById(cursaId.Value);
                     if (cursa != null)
                     {

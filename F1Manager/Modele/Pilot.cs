@@ -9,6 +9,6 @@ namespace F1Manager.Modele
         public int? NumarMasina { get; set; }
         public int? EchipaID { get; set; }
         public string? NumeEchipa { get; set; }
-        public int Puncte { get; set; } // calculated from clasament
+        public int Puncte { get; set; } 
     }
 }

@@ -242,5 +242,55 @@ namespace F1Manager.Formulare
             ThemeManager.ApplyThemeToAllOpenForms();
             btnToggleTheme.Text = ThemeManager.IsDarkMode ? "🌙" : "☀️";
         }
+
+        private void btnUrmatoareaCursa_Click(object sender, EventArgs e)
+        {
+            var nextRace = clasamentService.GetUrmatoareaCursa();
+            if (nextRace != null)
+            {
+                CurseForm form = new CurseForm(readOnly: true);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nu există curse programate.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnFinalizeazaCursa_Click(object sender, EventArgs e)
+        {
+            var nextRace = clasamentService.GetUrmatoareaCursa();
+            if (nextRace == null)
+            {
+                MessageBox.Show("Nu există curse programate de finalizat.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                $"Ești sigur că vrei să finalizezi cursa '{nextRace.NumeCursa}'?\nSe vor genera automat rezultate randomizate pentru toți piloții.",
+                "Confirmă finalizarea cursei",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var cursaFinalizata = clasamentService.FinalizeazaUrmatoareaCursa();
+                if (cursaFinalizata != null)
+                {
+                    MessageBox.Show(
+                        $"Cursa '{cursaFinalizata.NumeCursa}' a fost finalizată cu succes!\nRezultatele au fost generate și clasamentul a fost actualizat.",
+                        "Cursă Finalizată",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    // Refresh dashboard data
+                    LoadDashboardData();
+                }
+                else
+                {
+                    MessageBox.Show("Eroare la finalizarea cursei.", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

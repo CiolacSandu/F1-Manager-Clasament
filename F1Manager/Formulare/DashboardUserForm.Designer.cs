@@ -30,6 +30,8 @@ namespace F1Manager.Formulare
             labelSubHeader = new Label();
             labelHeader = new Label();
             panelContent = new Panel();
+            btnUrmatoareaCursa = new Button();
+            btnFinalizeazaCursa = new Button();
             btnVeziClasamentComplet = new Button();
             panelTopPiloti = new Panel();
             labelTopPilotiTitle = new Label();
@@ -270,6 +272,8 @@ namespace F1Manager.Formulare
             // panelContent
             panelContent.AutoScroll = true;
             panelContent.BackColor = Color.FromArgb(27, 27, 27);
+            panelContent.Controls.Add(btnFinalizeazaCursa);
+            panelContent.Controls.Add(btnUrmatoareaCursa);
             panelContent.Controls.Add(btnVeziClasamentComplet);
             panelContent.Controls.Add(panelTopPiloti);
             panelContent.Controls.Add(panelStatsTop);
@@ -522,6 +526,38 @@ namespace F1Manager.Formulare
             btnVeziClasamentComplet.Click += new EventHandler(btnVeziClasamentComplet_Click);
             btnVeziClasamentComplet.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
             btnVeziClasamentComplet.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
+            // btnUrmatoareaCursa
+            btnUrmatoareaCursa.BackColor = Color.FromArgb(0, 120, 215);
+            btnUrmatoareaCursa.FlatAppearance.BorderSize = 0;
+            btnUrmatoareaCursa.FlatStyle = FlatStyle.Flat;
+            btnUrmatoareaCursa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnUrmatoareaCursa.ForeColor = Color.White;
+            btnUrmatoareaCursa.Location = new Point(320, 352);
+            btnUrmatoareaCursa.Name = "btnUrmatoareaCursa";
+            btnUrmatoareaCursa.Size = new Size(280, 54);
+            btnUrmatoareaCursa.TabIndex = 3;
+            btnUrmatoareaCursa.Text = "🏁 Următoarea Cursă";
+            btnUrmatoareaCursa.UseVisualStyleBackColor = false;
+            btnUrmatoareaCursa.Click += new EventHandler(btnUrmatoareaCursa_Click);
+            btnUrmatoareaCursa.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            btnUrmatoareaCursa.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
+            // btnFinalizeazaCursa
+            btnFinalizeazaCursa.BackColor = Color.FromArgb(16, 124, 16);
+            btnFinalizeazaCursa.FlatAppearance.BorderSize = 0;
+            btnFinalizeazaCursa.FlatStyle = FlatStyle.Flat;
+            btnFinalizeazaCursa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnFinalizeazaCursa.ForeColor = Color.White;
+            btnFinalizeazaCursa.Location = new Point(620, 352);
+            btnFinalizeazaCursa.Name = "btnFinalizeazaCursa";
+            btnFinalizeazaCursa.Size = new Size(280, 54);
+            btnFinalizeazaCursa.TabIndex = 4;
+            btnFinalizeazaCursa.Text = "✅ Finalizează Cursa";
+            btnFinalizeazaCursa.UseVisualStyleBackColor = false;
+            btnFinalizeazaCursa.Click += new EventHandler(btnFinalizeazaCursa_Click);
+            btnFinalizeazaCursa.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            btnFinalizeazaCursa.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
 
             // panelCalendarPreview
             panelCalendarPreview.BackColor = Color.FromArgb(30, 30, 30);
@@ -790,5 +826,7 @@ namespace F1Manager.Formulare
         private Button btnVeziRezultateComplet;
 
         private Button btnToggleTheme;
+        private Button btnUrmatoareaCursa;
+        private Button btnFinalizeazaCursa;
     }
 }

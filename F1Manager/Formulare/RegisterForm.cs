@@ -18,7 +18,6 @@ namespace F1Manager.Formulare
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            ThemeManager.ApplyTheme(this);
         }
 
         private void LoadHeaderLogo()

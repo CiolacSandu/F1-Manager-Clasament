@@ -14,29 +14,11 @@ namespace F1Manager.Formulare
         {
             InitializeComponent();
             LoadHeaderLogo();
-            UpdateThemeButtonText();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             ThemeManager.ApplyTheme(this);
-            UpdateThemeButtonText();
-        }
-
-        private void btnToggleTheme_Click(object sender, EventArgs e)
-        {
-            ThemeManager.ToggleTheme();
-            ThemeManager.ApplyTheme(this);
-            ThemeManager.ApplyThemeToAllOpenForms();
-            UpdateThemeButtonText();
-        }
-
-        private void UpdateThemeButtonText()
-        {
-            if (ThemeManager.IsDarkMode)
-                btnToggleTheme.Text = "🌙";
-            else
-                btnToggleTheme.Text = "☀️";
         }
 
         private void LoadHeaderLogo()

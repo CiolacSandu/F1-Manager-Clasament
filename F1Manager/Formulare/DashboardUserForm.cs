@@ -235,6 +235,31 @@ namespace F1Manager.Formulare
             }
         }
 
+        private void btnVeziRezultate_Click(object sender, EventArgs e)
+        {
+            var racesWithResults = clasamentService.GetCurseCuRezultate();
+            if (racesWithResults.Count > 0)
+            {
+                ClasamentForm form = new ClasamentForm("Rezultate", racesWithResults[0].CursaID);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nu există rezultate pentru nicio cursă.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnActualizeazaClasament_Click(object sender, EventArgs e)
+        {
+            clasamentService.ActualizeazaClasament();
+            LoadDashboardData();
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            clasamentService.BackupDatabase();
+        }
+
         private void btnToggleTheme_Click(object sender, EventArgs e)
         {
             ThemeManager.ToggleTheme();
@@ -290,6 +315,85 @@ namespace F1Manager.Formulare
                 {
                     MessageBox.Show("Eroare la finalizarea cursei.", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        // ========== Search Pilot Methods ==========
+
+        private void buttonSearchPilot_Click(object sender, EventArgs e)
+        {
+            EfectueazaCautare();
+        }
+
+        private void textBoxSearchPilot_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                EfectueazaCautare();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textBoxSearchPilot_Enter(object sender, EventArgs e)
+        {
+            if (textBoxSearchPilot.Text == "Introdu numele pilotului...")
+            {
+                textBoxSearchPilot.Text = "";
+                textBoxSearchPilot.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBoxSearchPilot_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxSearchPilot.Text))
+            {
+                textBoxSearchPilot.Text = "Introdu numele pilotului...";
+                textBoxSearchPilot.ForeColor = Color.Gray;
+            }
+        }
+
+        private void EfectueazaCautare()
+        {
+            try
+            {
+                string numeCautat = textBoxSearchPilot.Text.Trim();
+                if (string.IsNullOrWhiteSpace(numeCautat) || numeCautat == "Introdu numele pilotului...")
+                {
+                    MessageBox.Show("Introdu numele unui pilot pentru căutare.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var rezultat = clasamentService.CautaPilot(numeCautat);
+
+                // Ascunde toate label-ele de rezultat
+                labelSearchResultNume.Visible = false;
+                labelSearchResultEchipa.Visible = false;
+                labelSearchResultPozitie.Visible = false;
+                labelSearchResultPuncte.Visible = false;
+                labelSearchNoResult.Visible = false;
+
+                if (rezultat != null)
+                {
+                    labelSearchResultNume.Text = $"🏎️ {rezultat.NumePilot}";
+                    labelSearchResultNume.Visible = true;
+
+                    labelSearchResultEchipa.Text = $"🏁 Echipa: {rezultat.NumeEchipa ?? "N/A"}";
+                    labelSearchResultEchipa.Visible = true;
+
+                    labelSearchResultPozitie.Text = $"📍 Poziția în clasament: #{rezultat.PozitieFinala}";
+                    labelSearchResultPozitie.Visible = true;
+
+                    labelSearchResultPuncte.Text = $"⭐ Puncte totale: {rezultat.Puncte}";
+                    labelSearchResultPuncte.Visible = true;
+                }
+                else
+                {
+                    labelSearchNoResult.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la căutare: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

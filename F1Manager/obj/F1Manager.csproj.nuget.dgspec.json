@@ -47,6 +47,14 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[9.7.0, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.5, )"
+            },
+            "itext7": {
+              "target": "Package",
+              "version": "[9.6.0, )"
             }
           },
           "imports": [

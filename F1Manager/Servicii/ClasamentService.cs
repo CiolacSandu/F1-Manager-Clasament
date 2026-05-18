@@ -70,6 +70,29 @@ namespace F1Manager.Servicii
             return list;
         }
 
+        /// <summary>
+        /// Caută un pilot după nume și returnează poziția, echipa și punctele din clasamentul general.
+        /// </summary>
+        public Clasament? CautaPilot(string numeCautat)
+        {
+            var clasamentGeneral = GetClasamentGeneral();
+            if (string.IsNullOrWhiteSpace(numeCautat))
+                return null;
+
+            string searchTerm = numeCautat.Trim().ToLower();
+
+            foreach (var item in clasamentGeneral)
+            {
+                if (!string.IsNullOrEmpty(item.NumePilot) &&
+                    item.NumePilot.ToLower().Contains(searchTerm))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
         public List<Clasament> GetRezultateByCursa(int cursaId)
         {
             var list = new List<Clasament>();
@@ -240,7 +263,7 @@ namespace F1Manager.Servicii
             if (nextRace == null)
                 return null;
 
-            
+        
             string getPilotsQuery = @"
                 SELECT p.PilotID 
                 FROM piloti p 
@@ -249,10 +272,10 @@ namespace F1Manager.Servicii
             if (dtPiloti == null || dtPiloti.Rows.Count == 0)
                 return null;
 
-           
+          
             int[] points = { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1 };
 
-           
+          
             for (int i = 0; i < dtPiloti.Rows.Count; i++)
             {
                 int pilotId = Convert.ToInt32(dtPiloti.Rows[i]["PilotID"]);

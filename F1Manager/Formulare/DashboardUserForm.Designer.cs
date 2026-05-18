@@ -17,6 +17,9 @@ namespace F1Manager.Formulare
         {
             components = new System.ComponentModel.Container();
             btnToggleTheme = new Button();
+            btnActualizeazaClasament = new Button();
+            btnBackup = new Button();
+            btnVeziRezultate = new Button();
             panelSidebar = new Panel();
             buttonLogout = new Button();
             buttonClasamentEchipe = new Button();
@@ -82,6 +85,124 @@ namespace F1Manager.Formulare
             panelStatsTop.SuspendLayout();
             panelCalendarPreview.SuspendLayout();
             panelResultsPreview.SuspendLayout();
+
+            // panelSearchPilot
+            panelSearchPilot = new Panel();
+            panelSearchPilot.BackColor = Color.FromArgb(30, 30, 30);
+            panelSearchPilot.Location = new Point(20, 136);
+            panelSearchPilot.Name = "panelSearchPilot";
+            panelSearchPilot.Padding = new Padding(16);
+            panelSearchPilot.Size = new Size(1600, 120);
+            panelSearchPilot.TabIndex = 6;
+
+            // labelSearchTitle
+            labelSearchTitle = new Label();
+            labelSearchTitle.AutoSize = true;
+            labelSearchTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSearchTitle.ForeColor = Color.White;
+            labelSearchTitle.Location = new Point(16, 8);
+            labelSearchTitle.Name = "labelSearchTitle";
+            labelSearchTitle.Size = new Size(180, 37);
+            labelSearchTitle.TabIndex = 0;
+            labelSearchTitle.Text = "🔍 Caută Pilot";
+
+            // textBoxSearchPilot
+            textBoxSearchPilot = new TextBox();
+            textBoxSearchPilot.BackColor = Color.White;
+            textBoxSearchPilot.ForeColor = Color.Black;
+            textBoxSearchPilot.BorderStyle = BorderStyle.FixedSingle;
+            textBoxSearchPilot.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxSearchPilot.Location = new Point(16, 52);
+            textBoxSearchPilot.Name = "textBoxSearchPilot";
+            textBoxSearchPilot.Size = new Size(700, 39);
+            textBoxSearchPilot.TabIndex = 1;
+            textBoxSearchPilot.Text = "Introdu numele pilotului...";
+            textBoxSearchPilot.Enter += new EventHandler(textBoxSearchPilot_Enter);
+            textBoxSearchPilot.Leave += new EventHandler(textBoxSearchPilot_Leave);
+            textBoxSearchPilot.KeyDown += new KeyEventHandler(textBoxSearchPilot_KeyDown);
+
+            // buttonSearchPilot
+            buttonSearchPilot = new Button();
+            buttonSearchPilot.BackColor = Color.FromArgb(230, 28, 43);
+            buttonSearchPilot.FlatAppearance.BorderSize = 0;
+            buttonSearchPilot.FlatStyle = FlatStyle.Flat;
+            buttonSearchPilot.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonSearchPilot.ForeColor = Color.White;
+            buttonSearchPilot.Location = new Point(730, 48);
+            buttonSearchPilot.Name = "buttonSearchPilot";
+            buttonSearchPilot.Size = new Size(200, 46);
+            buttonSearchPilot.TabIndex = 2;
+            buttonSearchPilot.Text = "🔍 Caută";
+            buttonSearchPilot.UseVisualStyleBackColor = false;
+            buttonSearchPilot.Click += new EventHandler(buttonSearchPilot_Click);
+            buttonSearchPilot.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            buttonSearchPilot.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
+            // labelSearchResultNume
+            labelSearchResultNume = new Label();
+            labelSearchResultNume.AutoSize = true;
+            labelSearchResultNume.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSearchResultNume.ForeColor = Color.White;
+            labelSearchResultNume.Location = new Point(16, 94);
+            labelSearchResultNume.Name = "labelSearchResultNume";
+            labelSearchResultNume.Size = new Size(0, 32);
+            labelSearchResultNume.TabIndex = 3;
+            labelSearchResultNume.Visible = false;
+
+            // labelSearchResultEchipa
+            labelSearchResultEchipa = new Label();
+            labelSearchResultEchipa.AutoSize = true;
+            labelSearchResultEchipa.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSearchResultEchipa.ForeColor = Color.LightGray;
+            labelSearchResultEchipa.Location = new Point(230, 98);
+            labelSearchResultEchipa.Name = "labelSearchResultEchipa";
+            labelSearchResultEchipa.Size = new Size(0, 25);
+            labelSearchResultEchipa.TabIndex = 4;
+            labelSearchResultEchipa.Visible = false;
+
+            // labelSearchResultPozitie
+            labelSearchResultPozitie = new Label();
+            labelSearchResultPozitie.AutoSize = true;
+            labelSearchResultPozitie.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSearchResultPozitie.ForeColor = Color.LightGray;
+            labelSearchResultPozitie.Location = new Point(480, 98);
+            labelSearchResultPozitie.Name = "labelSearchResultPozitie";
+            labelSearchResultPozitie.Size = new Size(0, 25);
+            labelSearchResultPozitie.TabIndex = 5;
+            labelSearchResultPozitie.Visible = false;
+
+            // labelSearchResultPuncte
+            labelSearchResultPuncte = new Label();
+            labelSearchResultPuncte.AutoSize = true;
+            labelSearchResultPuncte.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSearchResultPuncte.ForeColor = Color.LightGray;
+            labelSearchResultPuncte.Location = new Point(730, 98);
+            labelSearchResultPuncte.Name = "labelSearchResultPuncte";
+            labelSearchResultPuncte.Size = new Size(0, 25);
+            labelSearchResultPuncte.TabIndex = 6;
+            labelSearchResultPuncte.Visible = false;
+
+            // labelSearchNoResult
+            labelSearchNoResult = new Label();
+            labelSearchNoResult.AutoSize = true;
+            labelSearchNoResult.Font = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point);
+            labelSearchNoResult.ForeColor = Color.FromArgb(230, 28, 43);
+            labelSearchNoResult.Location = new Point(16, 94);
+            labelSearchNoResult.Name = "labelSearchNoResult";
+            labelSearchNoResult.Size = new Size(0, 28);
+            labelSearchNoResult.TabIndex = 7;
+            labelSearchNoResult.Visible = false;
+            labelSearchNoResult.Text = "Pilotul nu a fost găsit.";
+
+            panelSearchPilot.Controls.Add(labelSearchTitle);
+            panelSearchPilot.Controls.Add(textBoxSearchPilot);
+            panelSearchPilot.Controls.Add(buttonSearchPilot);
+            panelSearchPilot.Controls.Add(labelSearchResultNume);
+            panelSearchPilot.Controls.Add(labelSearchResultEchipa);
+            panelSearchPilot.Controls.Add(labelSearchResultPozitie);
+            panelSearchPilot.Controls.Add(labelSearchResultPuncte);
+            panelSearchPilot.Controls.Add(labelSearchNoResult);
+
             SuspendLayout();
 
             // panelSidebar
@@ -272,6 +393,9 @@ namespace F1Manager.Formulare
             // panelContent
             panelContent.AutoScroll = true;
             panelContent.BackColor = Color.FromArgb(27, 27, 27);
+            panelContent.Controls.Add(btnVeziRezultate);
+            panelContent.Controls.Add(btnBackup);
+            panelContent.Controls.Add(btnActualizeazaClasament);
             panelContent.Controls.Add(btnFinalizeazaCursa);
             panelContent.Controls.Add(btnUrmatoareaCursa);
             panelContent.Controls.Add(btnVeziClasamentComplet);
@@ -279,6 +403,7 @@ namespace F1Manager.Formulare
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelCalendarPreview);
             panelContent.Controls.Add(panelResultsPreview);
+            panelContent.Controls.Add(panelSearchPilot);
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(250, 100);
             panelContent.Name = "panelContent";
@@ -342,7 +467,7 @@ namespace F1Manager.Formulare
             panelTopPiloti.BackColor = Color.FromArgb(30, 30, 30);
             panelTopPiloti.Controls.Add(labelTopPilotiTitle);
             panelTopPiloti.Controls.Add(panelTop3);
-            panelTopPiloti.Location = new Point(20, 136);
+            panelTopPiloti.Location = new Point(20, 270);
             panelTopPiloti.Name = "panelTopPiloti";
             panelTopPiloti.Padding = new Padding(16);
             panelTopPiloti.Size = new Size(1600, 200);
@@ -511,53 +636,96 @@ namespace F1Manager.Formulare
             labelTop3Puncte.TabIndex = 3;
             labelTop3Puncte.Text = "0 P";
 
-            // btnVeziClasamentComplet
+            // ===== Actiuni row (5 butoane evenly spaced) =====
             btnVeziClasamentComplet.BackColor = Color.FromArgb(230, 28, 43);
             btnVeziClasamentComplet.FlatAppearance.BorderSize = 0;
             btnVeziClasamentComplet.FlatStyle = FlatStyle.Flat;
             btnVeziClasamentComplet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnVeziClasamentComplet.ForeColor = Color.White;
-            btnVeziClasamentComplet.Location = new Point(20, 352);
+            btnVeziClasamentComplet.Location = new Point(20, 486);
             btnVeziClasamentComplet.Name = "btnVeziClasamentComplet";
-            btnVeziClasamentComplet.Size = new Size(280, 54);
+            btnVeziClasamentComplet.Size = new Size(250, 50);
             btnVeziClasamentComplet.TabIndex = 2;
-            btnVeziClasamentComplet.Text = "🏆 Vezi Clasament Complet";
+            btnVeziClasamentComplet.Text = "🏆 Clasament";
             btnVeziClasamentComplet.UseVisualStyleBackColor = false;
             btnVeziClasamentComplet.Click += new EventHandler(btnVeziClasamentComplet_Click);
             btnVeziClasamentComplet.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
             btnVeziClasamentComplet.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
 
-            // btnUrmatoareaCursa
             btnUrmatoareaCursa.BackColor = Color.FromArgb(0, 120, 215);
             btnUrmatoareaCursa.FlatAppearance.BorderSize = 0;
             btnUrmatoareaCursa.FlatStyle = FlatStyle.Flat;
             btnUrmatoareaCursa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnUrmatoareaCursa.ForeColor = Color.White;
-            btnUrmatoareaCursa.Location = new Point(320, 352);
+            btnUrmatoareaCursa.Location = new Point(290, 486);
             btnUrmatoareaCursa.Name = "btnUrmatoareaCursa";
-            btnUrmatoareaCursa.Size = new Size(280, 54);
+            btnUrmatoareaCursa.Size = new Size(250, 50);
             btnUrmatoareaCursa.TabIndex = 3;
-            btnUrmatoareaCursa.Text = "🏁 Următoarea Cursă";
+            btnUrmatoareaCursa.Text = "📅 Următoarea Cursă";
             btnUrmatoareaCursa.UseVisualStyleBackColor = false;
             btnUrmatoareaCursa.Click += new EventHandler(btnUrmatoareaCursa_Click);
             btnUrmatoareaCursa.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
             btnUrmatoareaCursa.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
 
-            // btnFinalizeazaCursa
+            btnVeziRezultate.BackColor = Color.FromArgb(100, 60, 160);
+            btnVeziRezultate.FlatAppearance.BorderSize = 0;
+            btnVeziRezultate.FlatStyle = FlatStyle.Flat;
+            btnVeziRezultate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnVeziRezultate.ForeColor = Color.White;
+            btnVeziRezultate.Location = new Point(560, 486);
+            btnVeziRezultate.Name = "btnVeziRezultate";
+            btnVeziRezultate.Size = new Size(250, 50);
+            btnVeziRezultate.TabIndex = 12;
+            btnVeziRezultate.Text = "📊 Vezi Rezultate";
+            btnVeziRezultate.UseVisualStyleBackColor = false;
+            btnVeziRezultate.Click += new EventHandler(btnVeziRezultate_Click);
+            btnVeziRezultate.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            btnVeziRezultate.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
             btnFinalizeazaCursa.BackColor = Color.FromArgb(16, 124, 16);
             btnFinalizeazaCursa.FlatAppearance.BorderSize = 0;
             btnFinalizeazaCursa.FlatStyle = FlatStyle.Flat;
             btnFinalizeazaCursa.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnFinalizeazaCursa.ForeColor = Color.White;
-            btnFinalizeazaCursa.Location = new Point(620, 352);
+            btnFinalizeazaCursa.Location = new Point(830, 486);
             btnFinalizeazaCursa.Name = "btnFinalizeazaCursa";
-            btnFinalizeazaCursa.Size = new Size(280, 54);
+            btnFinalizeazaCursa.Size = new Size(250, 50);
             btnFinalizeazaCursa.TabIndex = 4;
             btnFinalizeazaCursa.Text = "✅ Finalizează Cursa";
             btnFinalizeazaCursa.UseVisualStyleBackColor = false;
             btnFinalizeazaCursa.Click += new EventHandler(btnFinalizeazaCursa_Click);
             btnFinalizeazaCursa.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
             btnFinalizeazaCursa.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
+            btnActualizeazaClasament.BackColor = Color.FromArgb(180, 40, 40);
+            btnActualizeazaClasament.FlatAppearance.BorderSize = 0;
+            btnActualizeazaClasament.FlatStyle = FlatStyle.Flat;
+            btnActualizeazaClasament.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnActualizeazaClasament.ForeColor = Color.White;
+            btnActualizeazaClasament.Location = new Point(1100, 486);
+            btnActualizeazaClasament.Name = "btnActualizeazaClasament";
+            btnActualizeazaClasament.Size = new Size(250, 50);
+            btnActualizeazaClasament.TabIndex = 10;
+            btnActualizeazaClasament.Text = "🔄 Actualizează";
+            btnActualizeazaClasament.UseVisualStyleBackColor = false;
+            btnActualizeazaClasament.Click += new EventHandler(btnActualizeazaClasament_Click);
+            btnActualizeazaClasament.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            btnActualizeazaClasament.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
+
+            btnBackup.BackColor = Color.FromArgb(50, 50, 50);
+            btnBackup.FlatAppearance.BorderSize = 0;
+            btnBackup.FlatStyle = FlatStyle.Flat;
+            btnBackup.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBackup.ForeColor = Color.WhiteSmoke;
+            btnBackup.Location = new Point(1370, 486);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(210, 50);
+            btnBackup.TabIndex = 11;
+            btnBackup.Text = "💾 Backup";
+            btnBackup.UseVisualStyleBackColor = false;
+            btnBackup.Click += new EventHandler(btnBackup_Click);
+            btnBackup.MouseEnter += new EventHandler(InteractiveButton_MouseEnter);
+            btnBackup.MouseLeave += new EventHandler(InteractiveButton_MouseLeave);
 
             // panelCalendarPreview
             panelCalendarPreview.BackColor = Color.FromArgb(30, 30, 30);
@@ -568,10 +736,10 @@ namespace F1Manager.Formulare
             panelCalendarPreview.Controls.Add(labelCursa2);
             panelCalendarPreview.Controls.Add(labelCursa1);
             panelCalendarPreview.Controls.Add(labelCalendarTitle);
-            panelCalendarPreview.Location = new Point(20, 422);
+            panelCalendarPreview.Location = new Point(20, 552);
             panelCalendarPreview.Name = "panelCalendarPreview";
             panelCalendarPreview.Padding = new Padding(16);
-            panelCalendarPreview.Size = new Size(780, 320);
+            panelCalendarPreview.Size = new Size(780, 260);
             panelCalendarPreview.TabIndex = 4;
 
             // labelCalendarTitle
@@ -658,10 +826,10 @@ namespace F1Manager.Formulare
             panelResultsPreview.Controls.Add(labelRezultat2);
             panelResultsPreview.Controls.Add(labelRezultat1);
             panelResultsPreview.Controls.Add(labelResultsTitle);
-            panelResultsPreview.Location = new Point(820, 422);
+            panelResultsPreview.Location = new Point(820, 552);
             panelResultsPreview.Name = "panelResultsPreview";
             panelResultsPreview.Padding = new Padding(16);
-            panelResultsPreview.Size = new Size(780, 320);
+            panelResultsPreview.Size = new Size(780, 260);
             panelResultsPreview.TabIndex = 5;
 
             // labelResultsTitle
@@ -828,5 +996,19 @@ namespace F1Manager.Formulare
         private Button btnToggleTheme;
         private Button btnUrmatoareaCursa;
         private Button btnFinalizeazaCursa;
+        private Button btnActualizeazaClasament;
+        private Button btnBackup;
+        private Button btnVeziRezultate;
+
+        // Search Pilot controls
+        private Panel panelSearchPilot;
+        private Label labelSearchTitle;
+        private TextBox textBoxSearchPilot;
+        private Button buttonSearchPilot;
+        private Label labelSearchResultNume;
+        private Label labelSearchResultEchipa;
+        private Label labelSearchResultPozitie;
+        private Label labelSearchResultPuncte;
+        private Label labelSearchNoResult;
     }
 }

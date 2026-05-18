@@ -21,6 +21,8 @@ namespace F1Manager.Formulare
 
         private void PilotiForm_Load(object sender, EventArgs e)
         {
+            ThemeManager.ApplyTheme(this);
+            ApplyHoverStyles();
             LoadTeams();
             LoadData();
 
@@ -33,6 +35,25 @@ namespace F1Manager.Formulare
                 // Extend DataGridView width to fill the space
                 dataGridView.Width = 920;
             }
+        }
+
+        private void ApplyHoverStyles()
+        {
+            // Hover for action buttons
+            btnAdauga.MouseEnter += (s, ev) => btnAdauga.BackColor = Color.FromArgb(255, 60, 60);
+            btnAdauga.MouseLeave += (s, ev) => btnAdauga.BackColor = Color.FromArgb(230, 28, 43);
+
+            btnEditeaza.MouseEnter += (s, ev) => btnEditeaza.BackColor = Color.FromArgb(70, 70, 70);
+            btnEditeaza.MouseLeave += (s, ev) => btnEditeaza.BackColor = Color.FromArgb(50, 50, 50);
+
+            btnSterge.MouseEnter += (s, ev) => btnSterge.BackColor = Color.FromArgb(220, 60, 60);
+            btnSterge.MouseLeave += (s, ev) => btnSterge.BackColor = Color.FromArgb(180, 40, 40);
+
+            btnSalveaza.MouseEnter += (s, ev) => btnSalveaza.BackColor = Color.FromArgb(255, 60, 60);
+            btnSalveaza.MouseLeave += (s, ev) => btnSalveaza.BackColor = Color.FromArgb(230, 28, 43);
+
+            btnAnuleaza.MouseEnter += (s, ev) => btnAnuleaza.BackColor = Color.FromArgb(70, 70, 70);
+            btnAnuleaza.MouseLeave += (s, ev) => btnAnuleaza.BackColor = Color.FromArgb(50, 50, 50);
         }
 
         private void LoadTeams()

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using F1Manager.Servicii;
 using iTextSharp.text.pdf;
@@ -30,6 +31,7 @@ namespace F1Manager.Formulare
 
         private void ClasamentForm_Load(object sender, EventArgs e)
         {
+            ThemeManager.ApplyTheme(this);
             SetupGrid();
             LoadData();
         }
@@ -37,19 +39,36 @@ namespace F1Manager.Formulare
         private void SetupGrid()
         {
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(30, 30, 30);
-            dataGridView.ForeColor = System.Drawing.Color.White;
-            dataGridView.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            dataGridView.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
-            dataGridView.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(230, 28, 43);
-            dataGridView.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(50, 50, 50);
-            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            dataGridView.BackgroundColor = Color.FromArgb(30, 30, 30);
+            dataGridView.ForeColor = Color.White;
+            dataGridView.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridView.DefaultCellStyle.ForeColor = Color.White;
+            dataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 28, 43);
+            dataGridView.DefaultCellStyle.SelectionForeColor = Color.White;
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(50, 50, 50);
+            dataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridView.EnableHeadersVisualStyles = false;
             dataGridView.BorderStyle = BorderStyle.None;
             dataGridView.RowHeadersVisible = false;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.ReadOnly = true;
+
+            // Row styling - alternating colors
+            dataGridView.RowsDefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(46, 46, 46);
+        }
+
+        private void ApplyHoverStyle()
+        {
+            btnExportPDF.MouseEnter += (s, ev) =>
+            {
+                btnExportPDF.BackColor = Color.FromArgb(255, 60, 60);
+            };
+            btnExportPDF.MouseLeave += (s, ev) =>
+            {
+                btnExportPDF.BackColor = Color.FromArgb(230, 28, 43);
+            };
         }
 
         private void LoadData()
@@ -83,6 +102,9 @@ namespace F1Manager.Formulare
                     {
                         dataGridView.Rows.Add(r.PozitieFinala, r.NumePilot, r.NumeEchipa, r.Puncte);
                     }
+
+                    // Gold/Silver/Bronze coloring for top 3
+                    ColorTop3Rows();
                 }
                 else if (tipClasament == "Echipe")
                 {
@@ -97,6 +119,8 @@ namespace F1Manager.Formulare
                     {
                         dataGridView.Rows.Add(poz++, e.NumeEchipa, e.Puncte);
                     }
+
+                    ColorTop3Rows();
                 }
                 else // Piloti
                 {
@@ -112,12 +136,38 @@ namespace F1Manager.Formulare
                     {
                         dataGridView.Rows.Add(poz++, p.NumePilot, p.NumeEchipa, p.Puncte);
                     }
+
+                    ColorTop3Rows();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Eroare: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ColorTop3Rows()
+        {
+            try
+            {
+                if (dataGridView.Rows.Count >= 1)
+                {
+                    dataGridView.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(60, 50, 20);
+                    dataGridView.Rows[0].DefaultCellStyle.ForeColor = Color.Gold;
+                    dataGridView.Rows[0].DefaultCellStyle.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+                }
+                if (dataGridView.Rows.Count >= 2)
+                {
+                    dataGridView.Rows[1].DefaultCellStyle.BackColor = Color.FromArgb(45, 45, 50);
+                    dataGridView.Rows[1].DefaultCellStyle.ForeColor = Color.Silver;
+                }
+                if (dataGridView.Rows.Count >= 3)
+                {
+                    dataGridView.Rows[2].DefaultCellStyle.BackColor = Color.FromArgb(50, 40, 35);
+                    dataGridView.Rows[2].DefaultCellStyle.ForeColor = Color.FromArgb(205, 127, 50);
+                }
+            }
+            catch { /* Ignore styling errors */ }
         }
 
         private void btnExportPDF_Click(object sender, EventArgs e)
@@ -201,16 +251,6 @@ namespace F1Manager.Formulare
             {
                 MessageBox.Show("Eroare la exportul PDF: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnExportPDF_MouseEnter(object sender, EventArgs e)
-        {
-            btnExportPDF.BackColor = System.Drawing.Color.FromArgb(255, 60, 60);
-        }
-
-        private void btnExportPDF_MouseLeave(object sender, EventArgs e)
-        {
-            btnExportPDF.BackColor = System.Drawing.Color.FromArgb(230, 28, 43);
         }
     }
 }

@@ -20,6 +20,8 @@ namespace F1Manager.Formulare
 
         private void EchipeForm_Load(object sender, EventArgs e)
         {
+            ThemeManager.ApplyTheme(this);
+            ApplyHoverStyles();
             LoadData();
 
             if (readOnly)
@@ -30,6 +32,24 @@ namespace F1Manager.Formulare
                 panelForm.Visible = false;
                 dataGridView.Width = 920;
             }
+        }
+
+        private void ApplyHoverStyles()
+        {
+            btnAdauga.MouseEnter += (s, ev) => btnAdauga.BackColor = Color.FromArgb(255, 60, 60);
+            btnAdauga.MouseLeave += (s, ev) => btnAdauga.BackColor = Color.FromArgb(230, 28, 43);
+
+            btnEditeaza.MouseEnter += (s, ev) => btnEditeaza.BackColor = Color.FromArgb(70, 70, 70);
+            btnEditeaza.MouseLeave += (s, ev) => btnEditeaza.BackColor = Color.FromArgb(50, 50, 50);
+
+            btnSterge.MouseEnter += (s, ev) => btnSterge.BackColor = Color.FromArgb(220, 60, 60);
+            btnSterge.MouseLeave += (s, ev) => btnSterge.BackColor = Color.FromArgb(180, 40, 40);
+
+            btnSalveaza.MouseEnter += (s, ev) => btnSalveaza.BackColor = Color.FromArgb(255, 60, 60);
+            btnSalveaza.MouseLeave += (s, ev) => btnSalveaza.BackColor = Color.FromArgb(230, 28, 43);
+
+            btnAnuleaza.MouseEnter += (s, ev) => btnAnuleaza.BackColor = Color.FromArgb(70, 70, 70);
+            btnAnuleaza.MouseLeave += (s, ev) => btnAnuleaza.BackColor = Color.FromArgb(50, 50, 50);
         }
 
         private void LoadData()

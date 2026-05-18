@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using F1Manager.Modele;
@@ -18,6 +19,29 @@ namespace F1Manager.Formulare
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
+            ThemeManager.ApplyTheme(this);
+            ApplyButtonHoverStyles();
+        }
+
+        private void ApplyButtonHoverStyles()
+        {
+            btnRegister.MouseEnter += (s, ev) =>
+            {
+                btnRegister.BackColor = Color.FromArgb(255, 60, 60);
+            };
+            btnRegister.MouseLeave += (s, ev) =>
+            {
+                btnRegister.BackColor = Color.FromArgb(64, 64, 64);
+            };
+
+            btnBackToLogin.MouseEnter += (s, ev) =>
+            {
+                btnBackToLogin.ForeColor = ThemeManager.RedColor;
+            };
+            btnBackToLogin.MouseLeave += (s, ev) =>
+            {
+                btnBackToLogin.ForeColor = ThemeManager.ForeColor;
+            };
         }
 
         private void LoadHeaderLogo()

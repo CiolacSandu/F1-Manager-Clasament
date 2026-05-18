@@ -247,15 +247,129 @@ namespace F1Manager.Servicii
                 string fileName = $"Backup_F1Manager_{DateTime.Now:yyyyMMdd_HHmmss}.sql";
                 string filePath = Path.Combine(backupDir, fileName);
 
-                System.Windows.Forms.MessageBox.Show($"Backup salvat în: {filePath}", "Backup", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show($"Backup salvat în: {filePath}", "Backup", System.Windows.Forms.MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Eroare la backup: " + ex.Message, "Eroare", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show("Eroare la backup: " + ex.Message, "Eroare", System.Windows.Forms.MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-       
+        /// <summary>
+        /// Verifică dacă există curse în baza de date. Dacă nu, adaugă automat toate cursele F1.
+        /// </summary>
+        public void InitializeazaCurseDacaNecesar()
+        {
+            object result = db.ExecuteScalar("SELECT COUNT(*) FROM curse");
+            int count = result != null ? Convert.ToInt32(result) : 0;
+            if (count == 0)
+            {
+                AdaugaToateCurseleF1();
+            }
+        }
+
+        /// <summary>
+        /// Verifică dacă toate cursele din calendar au fost finalizate (au rezultate în clasament).
+        /// </summary>
+        public bool ToateCurseleFinalizate()
+        {
+            object result = db.ExecuteScalar(@"
+                SELECT COUNT(*) FROM curse c
+                LEFT JOIN clasament cl ON c.CursaID = cl.CursaID
+                WHERE cl.CursaID IS NULL");
+            int curseNeFinalizate = result != null ? Convert.ToInt32(result) : 0;
+            return curseNeFinalizate == 0;
+        }
+
+        /// <summary>
+        /// Returnează campionul la piloți (cel mai multe puncte).
+        /// </summary>
+        public Clasament? GetCampionPiloti()
+        {
+            var clasament = GetClasamentGeneral();
+            return clasament.Count > 0 ? clasament[0] : null;
+        }
+
+        /// <summary>
+        /// Returnează campioana la echipe (cele mai multe puncte).
+        /// </summary>
+        public Clasament? GetCampionEchipe()
+        {
+            var clasament = GetClasamentEchipe();
+            return clasament.Count > 0 ? clasament[0] : null;
+        }
+
+        /// <summary>
+        /// Resetează sezonul: șterge punctele și adaugă toate cursele F1 reale în calendar.
+        /// </summary>
+        public void ResetSezon()
+        {
+            // Șterge punctele din clasament
+            db.ExecuteNonQuery("DELETE FROM clasament");
+            
+            // Șterge toate cursele
+            db.ExecuteNonQuery("DELETE FROM curse");
+            
+            // Adaugă toate cursele F1 reale în calendar
+            AdaugaToateCurseleF1();
+        }
+
+        /// <summary>
+        /// Adaugă toate cele 24 de curse din calendarul F1 real.
+        /// </summary>
+        public void AdaugaToateCurseleF1()
+        {
+            DateTime startDate = DateTime.Now.AddDays(7);
+            
+            // Toate cele 24 de Mari Premii F1 în ordinea calendarului real
+            var curseF1 = new (string nume, string locatie, int ture)[]
+            {
+                ("Grand Prix al Bahrainului", "Sakhir, Bahrain", 57),
+                ("Grand Prix al Arabiei Saudite", "Jeddah, Arabia Saudită", 50),
+                ("Grand Prix al Australiei", "Melbourne, Australia", 58),
+                ("Grand Prix al Japoniei", "Suzuka, Japonia", 53),
+                ("Grand Prix al Chinei", "Shanghai, China", 56),
+                ("Grand Prix de Miami", "Miami, SUA", 57),
+                ("Grand Prix al Emiliei-Romagna", "Imola, Italia", 63),
+                ("Grand Prix de Monaco", "Monte Carlo, Monaco", 78),
+                ("Grand Prix al Canadei", "Montreal, Canada", 70),
+                ("Grand Prix al Spaniei", "Barcelona, Spania", 66),
+                ("Grand Prix al Austriei", "Spielberg, Austria", 71),
+                ("Grand Prix al Marii Britanii", "Silverstone, Marea Britanie", 52),
+                ("Grand Prix al Ungariei", "Budapesta, Ungaria", 70),
+                ("Grand Prix al Belgiei", "Spa-Francorchamps, Belgia", 44),
+                ("Grand Prix al Țărilor de Jos", "Zandvoort, Olanda", 72),
+                ("Grand Prix al Italiei", "Monza, Italia", 53),
+                ("Grand Prix al Azerbaidjanului", "Baku, Azerbaidjan", 51),
+                ("Grand Prix al Republicii Singapore", "Singapore, Singapore", 62),
+                ("Grand Prix al Statelor Unite", "Austin, SUA", 56),
+                ("Grand Prix al Mexicului", "Ciudad de México, Mexic", 71),
+                ("Grand Prix al Braziliei", "São Paulo, Brazilia", 71),
+                ("Grand Prix de Las Vegas", "Las Vegas, SUA", 50),
+                ("Grand Prix al Qatarului", "Lusail, Qatar", 57),
+                ("Grand Prix de la Abu Dhabi", "Abu Dhabi, EAU", 58)
+            };
+
+            for (int i = 0; i < curseF1.Length; i++)
+            {
+                DateTime dataCursa = startDate.AddDays(i * 7);
+                string dataStr = dataCursa.ToString("yyyy-MM-dd");
+                var (nume, locatie, ture) = curseF1[i];
+
+                string query = @"
+                    INSERT INTO curse (NumeCursa, Locatie, DataCursa, NumarTure)
+                    VALUES (@nume, @locatie, @data, @ture)";
+
+                db.ExecuteNonQuery(query, new MySqlParameter[]
+                {
+                    new MySqlParameter("@nume", nume),
+                    new MySqlParameter("@locatie", locatie),
+                    new MySqlParameter("@data", dataStr),
+                    new MySqlParameter("@ture", ture)
+                });
+            }
+        }
+
         public Cursa? FinalizeazaUrmatoareaCursa()
         {
         
@@ -299,8 +413,6 @@ namespace F1Manager.Servicii
             return nextRace;
         }
 
-    
-        
         public Cursa? AdaugaUrmatoareaCursa()
         {
 

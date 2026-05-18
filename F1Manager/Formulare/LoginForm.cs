@@ -19,6 +19,30 @@ namespace F1Manager.Formulare
         private void LoginForm_Load(object sender, EventArgs e)
         {
             ThemeManager.ApplyTheme(this);
+            ApplyButtonHoverStyles();
+        }
+
+        private void ApplyButtonHoverStyles()
+        {
+            btnLogin.MouseEnter += (s, ev) =>
+            {
+                btnLogin.BackColor = Color.FromArgb(255, 60, 60);
+                btnLogin.ForeColor = Color.White;
+            };
+            btnLogin.MouseLeave += (s, ev) =>
+            {
+                btnLogin.BackColor = Color.FromArgb(64, 64, 64);
+                btnLogin.ForeColor = Color.White;
+            };
+
+            btnRegisterLink.MouseEnter += (s, ev) =>
+            {
+                btnRegisterLink.ForeColor = ThemeManager.RedColor;
+            };
+            btnRegisterLink.MouseLeave += (s, ev) =>
+            {
+                btnRegisterLink.ForeColor = ThemeManager.ForeColor;
+            };
         }
 
         private void LoadHeaderLogo()

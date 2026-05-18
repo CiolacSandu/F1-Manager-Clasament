@@ -61,8 +61,6 @@ namespace F1Manager.Formulare
             btnExportPDF.Text = "📄 Exportă PDF";
             btnExportPDF.UseVisualStyleBackColor = false;
             btnExportPDF.Click += new EventHandler(btnExportPDF_Click);
-            btnExportPDF.MouseEnter += new EventHandler(btnExportPDF_MouseEnter);
-            btnExportPDF.MouseLeave += new EventHandler(btnExportPDF_MouseLeave);
 
             // ClasamentForm
             AutoScaleDimensions = new SizeF(8F, 20F);

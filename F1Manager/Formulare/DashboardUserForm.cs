@@ -18,6 +18,7 @@ namespace F1Manager.Formulare
         private void DashboardUserForm_Load(object sender, EventArgs e)
         {
             ThemeManager.ApplyTheme(this);
+            clasamentService.InitializeazaCurseDacaNecesar();
             LoadDashboardData();
             ApplyDefaultHoverStyles();
         }
@@ -308,8 +309,18 @@ namespace F1Manager.Formulare
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
 
-                    // Refresh dashboard data
-                    LoadDashboardData();
+                    // Verifică dacă toate cursele sunt finalizate - SEZON ÎNCHEIAT!
+                    if (clasamentService.ToateCurseleFinalizate())
+                    {
+                        ChampionshipForm champForm = new ChampionshipForm();
+                        champForm.ShowDialog();
+                        LoadDashboardData();
+                    }
+                    else
+                    {
+                        // Refresh dashboard data
+                        LoadDashboardData();
+                    }
                 }
                 else
                 {
